@@ -29,11 +29,6 @@
                 </li>
                 <li>
                     <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
-                        ROI Calculator
-                    </button>
-                </li>
-                <li>
-                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
                         FAQ
                     </button>
                 </li>
