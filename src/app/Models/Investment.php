@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Investment extends Model
 {
-    protected $fillable = ['investitor_id', 'project_id'];
+    protected $fillable = ['investor_id', 'project_id'];
 
-    public function investirtor() {
-        return $this->belongsTo(Investitor::class, 'investitor_id', 'id');
+    public function investor() {
+        return $this->belongsTo(Investor::class, 'investor_id', 'id');
     }
 
     public function project() {

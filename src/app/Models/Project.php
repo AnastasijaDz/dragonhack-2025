@@ -13,6 +13,6 @@ class Project extends Model
     }
 
     public function investments() {
-        return $this->hasMany(Investment::class, 'projetc_id', 'id');
+        return $this->hasMany(Investment::class, 'project_id', 'id');
     }
 }
