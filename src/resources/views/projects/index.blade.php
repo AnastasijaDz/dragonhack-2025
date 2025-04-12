@@ -1,30 +1,38 @@
-@extends('layouts.app')  <!-- Extends your layout file -->
+@extends('layouts.app')
 
-@section('content')  <!-- Define the content section to be rendered in the layout -->
-    <div class="container">
-        <h1>Projects</h1>
-        
-        <!-- Check if there are any projects -->
+@section('content')
+    <div class="p-10">
         @if($projects->isEmpty())
             <p>No projects available.</p>
         @else
-            <!-- Loop through the projects and display each one -->
-            <div class="row">
+            <ul class="flex flex-col gap-10">
                 @foreach($projects as $project)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Title: {{ $project->name }}</h5>
-                                <p class="card-text">Landlord name: {{ $project->landlord->name }}</p>
-                                <p class="card-text">Descriptio{{ $project->description }}</p>
-                                <p class="card-text">Broj dostupnih sadnic: {{ $project->amount }}</p>
-                                <p class="card-text">Cena jedne sadnice: {{ $project->price }}</p>
-                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary">About</a>
-                            </div>
+                    <li class="flex flex-row gap-10 shadow-lg rounded-xl bg-white p-8">
+                        <div class="flex-shrink-0 flex items-center">
+                            <img class="w-[200px] h-auto rounded-lg" src="https://picsum.photos/200/200" alt="Project Image"
+                                class="rounded-lg">
                         </div>
-                    </div>
+                        <div class="flex flex-col gap-4 flex-grow text-black">
+                            <h2 class="text-2xl font-extrabold">{{ $project->name }}</h2>
+                            <div class="flex flex-row justify-between font-bold p-3 rounded-md bg-gray-200"><span>Landlord
+                                    name:</span><span>{{ $project->landlord->name }}</span></div>
+                            <div class="flex flex-row justify-between font-bold p-3 rounded-md">
+                                <span>Description:</span><span>{{ $project->description }}</span></div>
+                            <div class="flex flex-row justify-between font-bold p-3 rounded-md bg-gray-200"><span>Broj dostupnih
+                                    sadnic:</span><span>{{ $project->amount }}</span></div>
+                            <div class="flex flex-row justify-between font-bold p-3 rounded-md"><span>Cena jedne
+                                    sadnice:</span><span>{{ $project->price }}</span></div>
+                        </div>
+                        <div class="flex flex-col flex-shrink-0 justify-evenly gap-4 w-[200px]">
+                            <a class="text-center py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold" href="{{ route('projects.show', $project->id) }}">
+                                About
+                            </a>
+                            <button class="py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Calculate</button>
+                            <button class="py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Invest</button>
+                        </div>
+                    </li>
                 @endforeach
-            </div>
+            </ul>
         @endif
     </div>
 @endsection

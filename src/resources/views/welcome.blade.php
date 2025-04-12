@@ -95,7 +95,7 @@
             </div>
 
             <div class="flex items-center justify-center">
-                <div class="w-[95%] relative flex flex-row justify-center gap-10 bg-green-700 p-12 rounded-2xl">
+                <div class="w-[95%] relative flex flex-row justify-center gap-10 bg-green-800 p-12 rounded-2xl">
                     <div class="flex flex-col w-[60%] gap-10 items-end justify-center text-white">
                         <h2 class="text-5xl font-extrabold text-right">Focus on investing, not paperwork.</h2>
                         <p class="font-bold text-xl text-right pr-2">As an investor, your focus is on making money by smart investing.
