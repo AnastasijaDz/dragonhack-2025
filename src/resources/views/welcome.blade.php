@@ -43,8 +43,7 @@
         </div>
 
         <div class="flex flex-col gap-16 relative">
-            <ul class="profile-menu-options flex-col absolute z-10 right-12 top-4 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden">
-                <li class="w-full">
+                <ul class="profile-menu-options flex-col absolute z-10 right-12 top-4 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95">                <li class="w-full">
                     <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                         <div class="w-8 h-8">
                             <img class="w-full h-full" src="/svgs/card.svg">
@@ -154,7 +153,7 @@
                 </div>
             </div>
 
-            <div class="menu-open-overlay hidden absolute w-full h-full top-0 bg-black bg-opacity-50"></div>
+            <div class="menu-open-overlay hidden opacity-0 transition-all duration-300 ease-in-out absolute w-full h-full top-0 bg-black bg-opacity-50"></div>
         </div>
     </div>
 </body>
@@ -165,22 +164,39 @@
     const profileInfoButton = document.querySelector('button.profile-info');
 
     const openMenuDropdown = () => {
-        const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-        const isHidden = profileMenuOptions.classList.contains('hidden');
-        const isVisible = profileMenuOptions.classList.contains('flex');
+    const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+    const overlay = document.querySelector('div.menu-open-overlay');
+    
+    if (profileMenuOptions.classList.contains('hidden')) {
+        // Show menu
+        profileMenuOptions.classList.remove('hidden');
+        profileMenuOptions.classList.add('flex');
 
-        if (isHidden) {
-            profileMenuOptions.classList.remove('hidden');
-            profileMenuOptions.classList.add('flex');
-
-            document.querySelector('div.menu-open-overlay').classList.remove('hidden');
-        } else if (isVisible) {
+        // Wait a tiny bit to trigger the animation
+        setTimeout(() => {
+            profileMenuOptions.classList.remove('opacity-0', 'scale-95');
+            profileMenuOptions.classList.add('opacity-100', 'scale-100');
+            
+            overlay.classList.remove('hidden', 'opacity-0');
+            overlay.classList.add('opacity-100');
+        }, 10);
+    } else {
+        // Hide menu
+        profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+        profileMenuOptions.classList.add('opacity-0', 'scale-95');
+        
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
             profileMenuOptions.classList.remove('flex');
             profileMenuOptions.classList.add('hidden');
-
-            document.querySelector('div.menu-open-overlay').classList.add('hidden');
-        }
-    };
+            
+            overlay.classList.add('hidden');
+        }, 300);
+    }
+};
 
     document.addEventListener('DOMContentLoaded', () => {
         profileInfoButton.addEventListener('click', openMenuDropdown);
