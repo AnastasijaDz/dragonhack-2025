@@ -51,7 +51,9 @@
                 @foreach($projects as $project)
                     <li data-project-id="{{ $project->id }}" class="project-item flex flex-row gap-10 shadow-lg rounded-xl bg-white p-8">
                         <div class="flex-shrink-0 flex items-center">
-                            <img class="w-[200px] h-auto rounded-lg" src="https://picsum.photos/200/200" alt="Project Image">
+                            <div class="w-[200px] h-auto">
+                                <img class="rounded-lg" src="/images/barn.png" alt="Project Image">
+                            </div>
                         </div>
                         <div class="flex flex-col gap-4 flex-grow text-black">
                             <h2 class="text-2xl font-extrabold">{{ $project->name }}</h2>

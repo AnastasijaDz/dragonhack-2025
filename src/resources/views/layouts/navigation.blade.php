@@ -29,10 +29,12 @@
     </nav>
 
     <div class="relative">
-        <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700 focus:bg-green-700"
+        <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700 focus:bg-green-700 h-full"
             aria-expanded="false" aria-controls="profile-menu" aria-haspopup="true" aria-label="Profile Menu"
             tabindex="-1">
-            <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
+            <div class="h-12 w-12">
+            <img class="w-full h-full rounded-full" src="/images/professional-investor-profile-picture.png" />
+            </div>
             <span>{{ Auth::user()->name }}</span>
             <svg aria-hidden="true" width="25" height="25" viewBox="0 0 25 25" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
