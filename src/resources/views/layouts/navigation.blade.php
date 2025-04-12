@@ -62,10 +62,6 @@
     </ul>
 </div>
 
-<div
-    class="menu-open-overlay hidden opacity-0 transition-all duration-300 ease-in-out absolute w-full h-full top-0 bg-black bg-opacity-50">
-</div>
-
 <script>
     const profileInfoButton = document.querySelector('button.profile-info');
 
@@ -82,37 +78,21 @@
             setTimeout(() => {
                 profileMenuOptions.classList.remove('opacity-0', 'scale-95');
                 profileMenuOptions.classList.add('opacity-100', 'scale-100');
-
-                overlay.classList.remove('hidden', 'opacity-0');
-                overlay.classList.add('opacity-100');
             }, 10);
         } else {
             // Hide menu
             profileMenuOptions.classList.remove('opacity-100', 'scale-100');
             profileMenuOptions.classList.add('opacity-0', 'scale-95');
 
-            overlay.classList.remove('opacity-100');
-            overlay.classList.add('opacity-0');
-
             // Wait for animation to finish before hiding
             setTimeout(() => {
                 profileMenuOptions.classList.remove('flex');
                 profileMenuOptions.classList.add('hidden');
-
-                overlay.classList.add('hidden');
             }, 300);
         }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
         profileInfoButton.addEventListener('click', openMenuDropdown);
-
-        document.querySelector('div.menu-open-overlay').addEventListener('click', () => {
-            const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-            profileMenuOptions.classList.remove('flex');
-            profileMenuOptions.classList.add('hidden');
-
-            document.querySelector('div.menu-open-overlay').classList.add('hidden');
-        });
     });
 </script>
