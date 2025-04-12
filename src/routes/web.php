@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\LandlordsController;
 use App\Http\Controllers\InvestmentsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalculatorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,5 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('/calculate', [CalculatorController::class, 'calculate']);
+
+Route::get('/average-retail-cost', [CalculatorController::class, 'averageRetailCost']);
 
 require __DIR__.'/auth.php';

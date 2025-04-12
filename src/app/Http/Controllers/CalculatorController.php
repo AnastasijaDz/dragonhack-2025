@@ -34,4 +34,10 @@ class CalculatorController extends Controller
 
         return response()->json($chartData);
     }
+
+    public function averageRetailCost(): JsonResponse
+    {
+        $average = $this->statDataService->getAverageRetailCost();
+        return response()->json(['average_retail_cost' => $average]);
+    }
 }
