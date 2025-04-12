@@ -11,7 +11,7 @@
 <body>
     <div class="min-h-screen flex flex-col">
 
-        <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold">
+        <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl">
             <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
                 EcoStock
             </button>
