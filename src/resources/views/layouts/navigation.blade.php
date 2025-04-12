@@ -66,12 +66,15 @@
                 </button>
             </li>
             <li class="w-full">
-                <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
-                    <div class="w-8 h-8">
-                        <img class="w-full h-full" src="/svgs/logout.svg">
-                    </div>
-                    <p>Log out</p>
-                </button>
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                        </div>
+                        <p>Log out</p>
+                    </button>
+            </form>
             </li>
         </ul>
     </div>
