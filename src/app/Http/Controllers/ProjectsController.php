@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProjectsController
@@ -27,6 +28,7 @@ class ProjectsController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
         // Retrieve all projects from the database.
         $projects = Project::all();
 
