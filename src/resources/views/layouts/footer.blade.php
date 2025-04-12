@@ -8,15 +8,15 @@
     </div>
     <div class="flex flex-col gap-2">
       <span class="font-bold text-lg">Quick Links</span>
-      <a href="#" class="hover:text-green-700">About Us</a>
-      <a href="#" class="hover:text-green-700">Investments</a>
-      <a href="#" class="hover:text-green-700">FAQ</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">About Us</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">Investments</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">FAQ</a>
     </div>
     <div class="flex flex-col gap-2">
       <span class="font-bold text-lg">Legal</span>
-      <a href="#" class="hover:text-green-700">Privacy Policy</a>
-      <a href="#" class="hover:text-green-700">Terms of Service</a>
-      <a href="#" class="hover:text-green-700">Cookie Policy</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">Privacy Policy</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">Terms of Service</a>
+      <a href="#" class="hover:text-green-700 focus:text-green-700">Cookie Policy</a>
     </div>
   </div>
   <div class="flex flex-col gap-2 items-center justify-center">
