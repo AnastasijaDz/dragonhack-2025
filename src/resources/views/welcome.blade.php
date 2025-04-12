@@ -17,21 +17,21 @@
             </button>
 
             <div class="flex flex-row items-center gap-6">
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
                     About us
                 </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
                     Investments
                 </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
                     ROI Calculator
                 </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
                     FAQ
                 </button>
             </div>
 
-            <button class="flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
+            <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
                 <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
                 <span>Aleksa Sibinović</span>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,34 @@
             </button>
         </div>
 
-        <div class="flex flex-col gap-16">
+        <div class="flex flex-col gap-16 relative">
+            <ul class="profile-menu-options flex-col absolute z-10 right-12 top-4 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden">
+                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/card.svg">
+                        </div>
+                        <p>My portfolio</p>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/settings.svg">
+                        </div>
+                        <p>Settings</p>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg">
+                        </div>
+                        <p>Log out</p>
+                    </button>
+                </li>
+            </ul>
+
             <div class="w-full relative">
                 <img src="/images/main-page-image.jpg" alt="Main Page Image">
                 <div class="top-[40%] left-[10%] flex flex-col absolute text-white">
@@ -126,8 +153,36 @@
                     <span class="text-gray-600">All rights reserved.</span>
                 </div>
             </div>
+
+            <div class="menu-open-overlay hidden absolute w-full h-full top-0 bg-black bg-opacity-50"></div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    const profileInfoButton = document.querySelector('button.profile-info');
+
+    const openMenuDropdown = () => {
+        const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+        const isHidden = profileMenuOptions.classList.contains('hidden');
+        const isVisible = profileMenuOptions.classList.contains('flex');
+
+        if (isHidden) {
+            profileMenuOptions.classList.remove('hidden');
+            profileMenuOptions.classList.add('flex');
+
+            document.querySelector('div.menu-open-overlay').classList.remove('hidden');
+        } else if (isVisible) {
+            profileMenuOptions.classList.remove('flex');
+            profileMenuOptions.classList.add('hidden');
+
+            document.querySelector('div.menu-open-overlay').classList.add('hidden');
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        profileInfoButton.addEventListener('click', openMenuDropdown);
+    });
+</script>
