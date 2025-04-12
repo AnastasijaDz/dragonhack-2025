@@ -11,27 +11,27 @@
 <body>
     <div class="min-h-screen flex flex-col">
 
-        <div class="py-4 px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold">
-            <button class="flex items-center">
+        <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold">
+            <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
                 EkoStock
             </button>
 
             <div class="flex flex-row items-center gap-6">
-                <button class="flex items-center">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
                     About us
                 </button>
-                <button class="flex items-center">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
                     Investemnts
                 </button>
-                <button class="flex items-center">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
                     ROI Calculator
                 </button>
-                <button class="flex items-center">
+                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
                     FAQ
                 </button>
             </div>
 
-            <button class="flex flex-row gap-6 items-center">
+            <button class="flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
                 <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
                 <span>Aleksa Sibinović</span>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
