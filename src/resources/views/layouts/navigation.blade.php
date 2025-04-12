@@ -1,23 +1,23 @@
 <header
     class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl sticky top-0"
     role="banner">
-    <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
+    <button class="flex items-center hover:bg-green-700 p-4 rounded-md" tabindex="-1">
         <img src="/svgs/white-logo.svg" alt="Logo">
     </button>
 
     <nav role="navigation" aria-label="Main Navigation">
         <ul class="flex flex-row items-center gap-6 h-full">
-            <li class="h-full">
+            <li class="h-full" tabindex="-1">
                 <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                     About us
                 </button>
             </li>
-            <li class="h-full">
+            <li class="h-full" tabindex="-1">
                 <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                     Investments
                 </button>
             </li>
-            <li class="h-full">
+            <li class="h-full" tabindex="-1">
                 <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                     FAQ
                 </button>
@@ -27,7 +27,8 @@
 
     <div class="relative">
         <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700"
-            aria-expanded="false" aria-controls="profile-menu" aria-haspopup="true">
+            aria-expanded="false" aria-controls="profile-menu" aria-haspopup="true" aria-label="Profile Menu"
+            tabindex="-1">
             <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
             <span>Aleksa Sibinović</span>
             <svg aria-hidden="true" width="25" height="25" viewBox="0 0 25 25" fill="none"
