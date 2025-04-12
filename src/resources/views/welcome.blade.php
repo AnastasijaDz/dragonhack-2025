@@ -16,20 +16,28 @@
                 EcoStock
             </button>
 
-            <div class="flex flex-row items-center gap-6">
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
-                    About us
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
-                    Investments
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
-                    ROI Calculator
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
-                    FAQ
-                </button>
-            </div>
+            <ul class="flex flex-row items-center gap-6">
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        About us
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        Investments
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        ROI Calculator
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        FAQ
+                    </button>
+                </li>
+            </ul>
 
             <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
                 <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
