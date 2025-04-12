@@ -2,13 +2,12 @@
 
 @section('content')
     <style>
-        /* Define the whoopIn animation */
         @keyframes whoopIn {
             0% {
                 transform: scale(0);
                 opacity: 0;
             }
-            60% {
+            40% {
                 transform: scale(1.1);
                 opacity: 1;
             }
@@ -18,7 +17,6 @@
             }
         }
 
-        /* Define the whoopOut animation */
         @keyframes whoopOut {
             0% {
                 transform: scale(1);
@@ -34,7 +32,6 @@
             }
         }
 
-        /* Helper classes to trigger animations */
         .animate-whoopIn {
             animation: whoopIn 0.5s ease-out forwards;
         }
@@ -49,7 +46,7 @@
         @else
             <ul class="flex flex-col gap-10">
                 @foreach($projects as $project)
-                    <li data-project-id="{{ $project->id }}" class="project-item flex flex-row gap-10 shadow-lg rounded-xl bg-white p-8">
+                    <li data-project-id="{{ $project->id }}" data-price="{{ $project->price }}" class="project-item flex flex-row gap-10 shadow-lg rounded-xl bg-white p-8">
                         <div class="flex-shrink-0 flex items-center">
                             <div class="w-[200px] h-auto">
                                 <img class="rounded-lg" src="/images/barn.png" alt="Project Image">
@@ -75,7 +72,6 @@
                             </div>
                         </div>
                         <div class="flex flex-col flex-shrink-0 justify-evenly gap-4 w-[200px]">
-                            <!-- Trigger button for the modal remains here -->
                             <button class="calc-button py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Calculate</button>
                             <button class="py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Invest</button>
                         </div>
@@ -85,16 +81,15 @@
         @endif
     </div>
 
-    <!-- Modal for investment calculation -->
     <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden transition-opacity duration-300 ease-out">
-        <div id="modalContent" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-5xl transform scale-0">
+        <div id="modalContent" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
             <button id="closeCalcModal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">&times;</button>
             <div class="p-6 w-1/2 border-r">
                 <h2 class="text-xl font-bold">Calculate Investment</h2>
-                <form id="calcForm" class="mt-6">
+                <form id="calcForm" class="mt-8">
                     <div class="mb-4">
-                        <label for="investmentAmount" class="block font-bold">Amount</label>
-                        <input type="number" id="investmentAmount" name="amount" class="w-full p-2 border rounded" placeholder="Enter amount" required>
+                        <label for="treeCount" class="block font-bold">Number of Trees</label>
+                        <input type="number" id="treeCount" name="treeCount" class="w-full p-2 border rounded" placeholder="Enter number of trees" required>
                     </div>
                     <div class="mb-4">
                         <label for="investmentYears" class="block font-bold">Years</label>
@@ -109,17 +104,17 @@
                             Data extracted from official statistics in Slovenia
                         </div>
                     </div>
-                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded">Calculate</button>
+                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-8">Calculate</button>
                 </form>
             </div>
             <div class="p-6 w-1/2">
                 <canvas id="incomeChart" class="w-full h-64"></canvas>
                 <div id="investmentResults" class="mt-4">
                     <p class="text-black text-lg">
-                        The initial investment amount is expected to pay itself in <span class="text-green-800" id="paybackPeriod">--</span> years.
+                        The total cost is expected to be paid back in <span class="text-green-800" id="paybackPeriod">--</span> years.
                     </p>
                     <p class="text-black text-lg">
-                        Net profit gain after <span class="text-green-800" id="profitPeriod">--</span> years is <span class="text-green-800" id="netProfit">--</span> EUR.
+                        Net profit after <span class="text-green-800" id="profitPeriod">--</span> years is <span class="text-green-800" id="netProfit">--</span> €.
                     </p>
                 </div>
             </div>
@@ -143,12 +138,16 @@
             const profitPeriodElem = document.getElementById('profitPeriod');
             const netProfitElem = document.getElementById('netProfit');
 
+            let averageRetailCost = null;
+            let selectedProjectPrice = null;
+            const yieldPerTree = 20;
+
             let incomeChart = new Chart(incomeChartCanvas.getContext('2d'), {
                 type: 'line',
                 data: {
                     labels: [],
                     datasets: [{
-                        label: 'Estimated Value',
+                        label: 'Cumulative Net Profit',
                         data: [],
                         borderColor: 'blue',
                         fill: false
@@ -162,10 +161,10 @@
                 }
             });
 
-            const openModal = (trigger) => {
-                modalContent.classList.remove('animate-whoopOut');
+            const openModal = () => {
                 calcModal.classList.remove('hidden');
-                void modalContent.offsetWidth;
+                modalContent.classList.remove('scale-0');
+                modalContent.classList.remove('animate-whoopOut');
                 modalContent.classList.add('animate-whoopIn');
 
                 fetch('/average-retail-cost', {
@@ -178,38 +177,43 @@
                     .then(response => response.json())
                     .then(data => {
                         if(data.average_retail_cost) {
-                            retailCostValue.textContent = parseFloat(data.average_retail_cost).toFixed(2);
+                            averageRetailCost = parseFloat(data.average_retail_cost);
+                            retailCostValue.textContent = averageRetailCost.toFixed(2);
                         }
                     })
                     .catch(console.error);
             };
 
             const closeModal = () => {
-                modalContent.classList.remove('animate-whoopIn');
                 modalContent.classList.add('animate-whoopOut');
                 setTimeout(() => {
                     calcModal.classList.add('hidden');
                     calcForm.reset();
                     retailCostValue.textContent = '--';
+                    averageRetailCost = null;
+                    selectedProjectPrice = null;
+                    paybackPeriodElem.textContent = '--';
+                    profitPeriodElem.textContent = '--';
+                    netProfitElem.textContent = '--';
                     if (incomeChart) { incomeChart.destroy(); }
                     incomeChart = new Chart(incomeChartCanvas.getContext('2d'), {
                         type: 'line',
                         data: {
                             labels: [],
                             datasets: [{
-                                label: 'Estimated Value',
+                                label: 'Cumulative Net Profit',
                                 data: [],
                                 borderColor: 'blue',
                                 fill: false
                             }]
                         },
-                        options: { responsive: true, scales: { y: { beginAtZero: false } } }
+                        options: {
+                            responsive: true,
+                            scales: { y: { beginAtZero: false } }
+                        }
                     });
                     modalContent.classList.remove('animate-whoopOut');
-                    modalContent.style.transform = 'scale(0)';
-                    paybackPeriodElem.textContent = '--';
-                    profitPeriodElem.textContent = '--';
-                    netProfitElem.textContent = '--';
+                    modalContent.classList.add('scale-0');
                 }, 300);
             };
 
@@ -217,6 +221,7 @@
                 button.addEventListener('click', function() {
                     const li = this.closest('li');
                     modalProjectId.value = li ? li.dataset.projectId : '';
+                    selectedProjectPrice = li ? parseFloat(li.dataset.price) : null;
                     openModal();
                 });
             });
@@ -225,91 +230,65 @@
 
             calcForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const formData = new FormData(this);
-                fetch('/calculate', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
+                if (averageRetailCost === null) {
+                    alert('Average retail cost is not available yet. Please try again shortly.');
+                    return;
+                }
+                if (selectedProjectPrice === null) {
+                    alert('Project price is not available.');
+                    return;
+                }
+
+                const treeCount = parseFloat(document.getElementById('treeCount').value);
+                const investmentYears = parseInt(document.getElementById('investmentYears').value);
+
+                const totalCost = treeCount * selectedProjectPrice;
+                const annualIncome = treeCount * yieldPerTree * averageRetailCost;
+
+                const cumulativeNetProfit = [];
+                const labels = [];
+                for (let year = 1; year <= investmentYears; year++) {
+                    let cumIncome = annualIncome * year;
+                    let netProfit = cumIncome - totalCost;
+                    labels.push('Year ' + year);
+                    cumulativeNetProfit.push(netProfit);
+                }
+
+                if (incomeChart) { incomeChart.destroy(); }
+                incomeChart = new Chart(incomeChartCanvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Cumulative Net Profit',
+                            data: cumulativeNetProfit,
+                            borderColor: 'blue',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: false }
+                        }
                     }
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Build the chart using the returned data (each item contains year and value)
-                        const labels = data.map(item => 'Year ' + item.year);
-                        const values = data.map(item => item.value);
-                        if (incomeChart) { incomeChart.destroy(); }
-                        incomeChart = new Chart(incomeChartCanvas.getContext('2d'), {
-                            type: 'line',
-                            data: {
-                                labels: labels,
-                                datasets: [{
-                                    label: 'Estimated Value',
-                                    data: values,
-                                    borderColor: 'blue',
-                                    fill: false
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: false,
-                                        suggestedMin: values[0] - Math.abs(values[0] * 0.1),
-                                        suggestedMax: values[0] + Math.abs(values[0] * 0.1)
-                                    }
-                                }
-                            }
-                        });
+                });
 
-                        const investmentAmount = parseFloat(document.getElementById('investmentAmount').value);
-                        const investmentYears = parseInt(document.getElementById('investmentYears').value);
+                let payback;
+                if (annualIncome <= 0) {
+                    payback = 'Never';
+                } else if (totalCost <= annualIncome) {
+                    payback = 'Less than 1 year';
+                } else {
+                    payback = (totalCost / annualIncome).toFixed(1);
+                }
 
-                        // Interpolate to determine the precise payback period
-                        let paybackPeriod = null;
-                        if (values.length > 0) {
-                            // Check if the first value is already above or equal to investmentAmount
-                            if (values[0] >= investmentAmount) {
-                                // Estimate fraction if possible; if not, consider it less than a year
-                                if (values[0] === investmentAmount) {
-                                    paybackPeriod = 1;
-                                } else {
-                                    paybackPeriod = 0.5; // default guess or could be refined further
-                                }
-                            } else {
-                                for (let i = 0; i < data.length - 1; i++) {
-                                    const currentValue = data[i].value;
-                                    const nextValue = data[i + 1].value;
-                                    if (investmentAmount > currentValue && investmentAmount <= nextValue) {
-                                        // Linear interpolation between the current and the next data point
-                                        const fraction = (investmentAmount - currentValue) / (nextValue - currentValue);
-                                        paybackPeriod = data[i].year + fraction;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if (paybackPeriod === null) {
-                            paybackPeriod = 'N/A';
-                        } else if (typeof paybackPeriod === 'number') {
-                            // If less than one year then note it explicitly
-                            if (paybackPeriod < 1) {
-                                paybackPeriod = 'Less than a year';
-                            } else {
-                                paybackPeriod = paybackPeriod.toFixed(1);
-                            }
-                        }
+                const finalNetProfit = (annualIncome * investmentYears) - totalCost;
 
-                        const finalValue = data[data.length - 1].value;
-                        const netProfit = finalValue - investmentAmount;
-
-                        // Update results: static text in black, numbers in green
-                        paybackPeriodElem.textContent = paybackPeriod;
-                        profitPeriodElem.textContent = investmentYears;
-                        netProfitElem.textContent = typeof netProfit === 'number' ? netProfit.toFixed(2) : netProfit;
-                    })
-                    .catch(error => console.error('Error:', error));
+                paybackPeriodElem.textContent = payback;
+                profitPeriodElem.textContent = investmentYears;
+                netProfitElem.textContent = finalNetProfit.toFixed(2);
             });
         });
     </script>
