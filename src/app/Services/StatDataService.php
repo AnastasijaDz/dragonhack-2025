@@ -51,4 +51,14 @@ class StatDataService
         $latestPrice = end($prices);
         return $latestPrice / 100;
     }
+
+    public function getAverageRetailCost(): float
+    {
+        $priceData = $this->getYearlyPriceData();
+        $prices = $priceData['prices'];
+        if(empty($prices)) {
+            return 0;
+        }
+        return array_sum($prices) / count($prices);
+    }
 }

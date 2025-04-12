@@ -33,6 +33,7 @@
         <!-- Footer -->
         @include('layouts.footer')
     </div>
+    @yield('scripts')
 </body>
 
 </html>
