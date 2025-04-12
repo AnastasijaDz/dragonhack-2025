@@ -43,7 +43,7 @@
         </button>
 
         <ul id="profile-menu" role="menu" aria-label="Profile Menu"
-            class="profile-menu-options flex-col absolute z-10 right-12 top-28 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95">
+            class="profile-menu-options flex-col absolute z-10 right-1 top-28 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95 whitespace-nowrap">
             <li class="w-full">
                 <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                     <div class="w-8 h-8">
