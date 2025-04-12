@@ -13,9 +13,12 @@
                 </button>
             </li>
             <li class="h-full" tabindex="-1">
-                <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 focus:bg-green-700 h-full text-lg">
+                <form method="GET" action="{{ route('investments') }}" class="w-full flex items-center p-4 px-8 h-full rounded-md hover:bg-green-700 focus:bg-green-700 text-lg">
+                    @csrf
+                    <button>
                     Investments
                 </button>
+                </form>
             </li>
             <li class="h-full" tabindex="-1">
                 <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 focus:bg-green-700 h-full text-lg">
@@ -30,7 +33,7 @@
             aria-expanded="false" aria-controls="profile-menu" aria-haspopup="true" aria-label="Profile Menu"
             tabindex="-1">
             <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
-            <span>Aleksa Sibinović</span>
+            <span>{{ Auth::user()->name }}</span>
             <svg aria-hidden="true" width="25" height="25" viewBox="0 0 25 25" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -66,12 +69,15 @@
                 </button>
             </li>
             <li class="w-full">
-                <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
-                    <div class="w-8 h-8">
-                        <img class="w-full h-full" src="/svgs/logout.svg">
-                    </div>
-                    <p>Log out</p>
-                </button>
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                        </div>
+                        <p>Log out</p>
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
