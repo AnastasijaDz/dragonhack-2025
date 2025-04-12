@@ -4,34 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkoStock</title>
+    <title>EcoStock</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
     <div class="min-h-screen flex flex-col">
 
-        <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold">
+        <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl">
             <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
-                EkoStock
+                EcoStock
             </button>
 
-            <div class="flex flex-row items-center gap-6">
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
-                    About us
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
-                    Investemnts
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
-                    ROI Calculator
-                </button>
-                <button class="flex items-center p-4 rounded-md hover:bg-green-700">
-                    FAQ
-                </button>
-            </div>
+            <ul class="flex flex-row items-center gap-6">
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        About us
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        Investments
+                    </button>
+                </li>
+                <li>
+                    <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                        FAQ
+                    </button>
+                </li>
+            </ul>
 
-            <button class="flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
+            <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
                 <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
                 <span>Aleksa Sibinović</span>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,11 +45,37 @@
             </button>
         </div>
 
-        <div class="flex flex-col gap-16">
+        <div class="flex flex-col gap-16 relative">
+                <ul class="profile-menu-options flex-col absolute z-10 right-12 top-4 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95">                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/card.svg">
+                        </div>
+                        <p>My portfolio</p>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/settings.svg">
+                        </div>
+                        <p>Settings</p>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg">
+                        </div>
+                        <p>Log out</p>
+                    </button>
+                </li>
+            </ul>
+
             <div class="w-full relative">
                 <img src="/images/main-page-image.jpg" alt="Main Page Image">
                 <div class="top-[40%] left-[10%] flex flex-col absolute text-white">
-                    <h1 class="text-8xl font-bold">EkoStock</h1>
+                    <h1 class="text-8xl font-bold">EcoStock</h1>
                     <p class="text-6xl">Backing Farms, Building Futures.</p>
                 </div>
             </div>
@@ -104,7 +133,7 @@
                 <div class="flex flex-row gap-20">
                     <div class="flex flex-col gap-2">
                         <span class="font-bold text-lg">Contact Us</span>
-                        <span>support@ekostock.com</span>
+                        <span>support@ecostock.com</span>
                         <span>+386 1 234 567</span>
                         <span>Ljubljana, Slovenia</span>
                     </div>
@@ -126,8 +155,61 @@
                     <span class="text-gray-600">All rights reserved.</span>
                 </div>
             </div>
+
+            <div class="menu-open-overlay hidden opacity-0 transition-all duration-300 ease-in-out absolute w-full h-full top-0 bg-black bg-opacity-50"></div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    const profileInfoButton = document.querySelector('button.profile-info');
+
+    const openMenuDropdown = () => {
+    const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+    const overlay = document.querySelector('div.menu-open-overlay');
+    
+    if (profileMenuOptions.classList.contains('hidden')) {
+        // Show menu
+        profileMenuOptions.classList.remove('hidden');
+        profileMenuOptions.classList.add('flex');
+
+        // Wait a tiny bit to trigger the animation
+        setTimeout(() => {
+            profileMenuOptions.classList.remove('opacity-0', 'scale-95');
+            profileMenuOptions.classList.add('opacity-100', 'scale-100');
+            
+            overlay.classList.remove('hidden', 'opacity-0');
+            overlay.classList.add('opacity-100');
+        }, 10);
+    } else {
+        // Hide menu
+        profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+        profileMenuOptions.classList.add('opacity-0', 'scale-95');
+        
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            profileMenuOptions.classList.remove('flex');
+            profileMenuOptions.classList.add('hidden');
+            
+            overlay.classList.add('hidden');
+        }, 300);
+    }
+};
+
+    document.addEventListener('DOMContentLoaded', () => {
+        profileInfoButton.addEventListener('click', openMenuDropdown);
+
+        document.querySelector('div.menu-open-overlay').addEventListener('click', () => {
+            const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+            profileMenuOptions.classList.remove('flex');
+            profileMenuOptions.classList.add('hidden');
+
+            document.querySelector('div.menu-open-overlay').classList.add('hidden');
+        });
+    });
+</script>
