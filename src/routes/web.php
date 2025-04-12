@@ -9,7 +9,7 @@ use App\Http\Controllers\InvestorsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -27,9 +27,9 @@ Route::get('/investments', [InvestmentsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('investments');
 
-Route::get('/my-profile', [InvestorsController::class, 'show'])
+Route::get('/my-portfolio', [InvestorsController::class, 'show'])
     ->middleware(['auth', 'verified'])
-    ->name('my-profile');
+    ->name('my-portfolio');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

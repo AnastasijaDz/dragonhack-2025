@@ -1,23 +1,30 @@
 <header
     class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl sticky top-0"
     role="banner">
-    <button class="flex items-center hover:bg-green-700 focus:bg-green-700 p-4 rounded-md" tabindex="-1">
-        <img src="/svgs/white-logo.svg" alt="Logo">
-    </button>
+    <form method="GET" action="{{ route('home') }}" class="w-full">
+        @csrf
+        <button class="flex items-center hover:bg-green-700 focus:bg-green-700 p-4 rounded-md" tabindex="-1">
+            <img src="/svgs/white-logo.svg" alt="Logo">
+        </button>
+    </form>
 
     <nav role="navigation" aria-label="Main Navigation">
         <ul class="flex flex-row items-center gap-6 h-full">
             <li class="h-full" tabindex="-1">
-                <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 focus:bg-green-700 h-full text-lg">
-                    About us
-                </button>
-            </li>
-            <li class="h-full" tabindex="-1">
-                <form method="GET" action="{{ route('investments') }}" class="w-full flex items-center p-4 px-8 h-full rounded-md hover:bg-green-700 focus:bg-green-700 text-lg">
+                <form method="GET" action="{{ route('home') }}"
+                    class="w-full flex items-center p-4 px-8 h-full rounded-md hover:bg-green-700 focus:bg-green-700 text-lg">
                     @csrf
                     <button>
-                    Investments
-                </button>
+                        About us
+                    </button>
+                </form>
+            </li>
+            <li class="h-full" tabindex="-1">
+                <form method="GET" action="{{ route('projects') }}" class="w-full flex items-center p-4 px-8 h-full rounded-md hover:bg-green-700 focus:bg-green-700 text-lg">
+                    @csrf
+                    <button>
+                        Projects
+                    </button>
                 </form>
             </li>
             <li class="h-full" tabindex="-1">
@@ -47,20 +54,26 @@
         <ul id="profile-menu" role="menu" aria-label="Profile Menu"
             class="profile-menu-options flex-col absolute z-10 right-1 top-28 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95 whitespace-nowrap">
             <li class="w-full">
-                <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
-                    <div class="w-8 h-8">
-                        <img class="w-full h-full" src="/svgs/card.svg">
-                    </div>
-                    <p>My Portfolio</p>
-                </button>
+                <form method="GET" action="{{ route('my-portfolio') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                        </div>
+                        <p>My Portfolio</p>
+                    </button>
+                </form>
             </li>
             <li class="w-full">
-                <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
-                    <div class="w-8 h-8">
-                        <img class="w-full h-full fill-black" src="/svgs/dollar-square.svg">
-                    </div>
-                    <p>Manage Investments</p>
-                </button>
+                <form method="GET" action="{{ route('investments') }}" class="w-full">
+                    @csrf
+                    <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                        <div class="w-8 h-8">
+                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                        </div>
+                        <p>Manage investments</p>
+                    </button>
+                </form>
             </li>
             <li class="w-full">
                 <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
