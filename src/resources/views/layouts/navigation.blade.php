@@ -1,21 +1,21 @@
 <header class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl">
     <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
-        EcoStock
+        <img src="/svgs/white-logo.svg" alt="Logo">
     </button>
 
     <ul class="flex flex-row items-center gap-6">
-        <li>
-            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+        <li class="h-full">
+            <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                 About us
             </button>
         </li>
-        <li>
-            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+        <li class="h-full">
+            <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                 Investments
             </button>
         </li>
-        <li>
-            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+        <li class="h-full">
+            <button class="flex items-center p-4 px-8 rounded-md hover:bg-green-700 h-full text-lg">
                 FAQ
             </button>
         </li>
