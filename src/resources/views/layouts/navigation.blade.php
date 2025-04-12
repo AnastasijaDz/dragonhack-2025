@@ -65,30 +65,37 @@
 <script>
     const profileInfoButton = document.querySelector('button.profile-info');
 
+    const closeMenu = () => {
+        const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+        profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+        profileMenuOptions.classList.add('opacity-0', 'scale-95');
+
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            profileMenuOptions.classList.remove('flex');
+            profileMenuOptions.classList.add('hidden');
+        }, 300);
+    };
+
+    const openMenu = (profileMenuOptions) => {
+        // Show menu
+        profileMenuOptions.classList.remove('hidden');
+        profileMenuOptions.classList.add('flex');
+
+        // Wait a tiny bit to trigger the animation
+        setTimeout(() => {
+            profileMenuOptions.classList.remove('opacity-0', 'scale-95');
+            profileMenuOptions.classList.add('opacity-100', 'scale-100');
+        }, 10);
+    };
+
     const openMenuDropdown = () => {
         const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-        const overlay = document.querySelector('div.menu-open-overlay');
 
         if (profileMenuOptions.classList.contains('hidden')) {
-            // Show menu
-            profileMenuOptions.classList.remove('hidden');
-            profileMenuOptions.classList.add('flex');
-
-            // Wait a tiny bit to trigger the animation
-            setTimeout(() => {
-                profileMenuOptions.classList.remove('opacity-0', 'scale-95');
-                profileMenuOptions.classList.add('opacity-100', 'scale-100');
-            }, 10);
+            openMenu(profileMenuOptions);
         } else {
-            // Hide menu
-            profileMenuOptions.classList.remove('opacity-100', 'scale-100');
-            profileMenuOptions.classList.add('opacity-0', 'scale-95');
-
-            // Wait for animation to finish before hiding
-            setTimeout(() => {
-                profileMenuOptions.classList.remove('flex');
-                profileMenuOptions.classList.add('hidden');
-            }, 300);
+            closeMenu();
         }
     };
 
@@ -98,18 +105,8 @@
         // Close the menu when clicking outside of it
         document.addEventListener('click', (event) => {
             const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-            const overlay = document.querySelector('div.menu-open-overlay');
-
             if (!profileInfoButton.contains(event.target) && !profileMenuOptions.contains(event.target)) {
-                // Hide menu
-                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
-                profileMenuOptions.classList.add('opacity-0', 'scale-95');
-
-                // Wait for animation to finish before hiding
-                setTimeout(() => {
-                    profileMenuOptions.classList.remove('flex');
-                    profileMenuOptions.classList.add('hidden');
-                }, 300);
+                closeMenu();
             }
         });
 
@@ -117,30 +114,14 @@
         const menuItems = document.querySelectorAll('ul.profile-menu-options li button');
         menuItems.forEach(item => {
             item.addEventListener('click', () => {
-                const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
-                profileMenuOptions.classList.add('opacity-0', 'scale-95');
-
-                // Wait for animation to finish before hiding
-                setTimeout(() => {
-                    profileMenuOptions.classList.remove('flex');
-                    profileMenuOptions.classList.add('hidden');
-                }, 300);
+                closeMenu();
             });
         });
 
         // Close the menu when pressing the Escape key
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
-                const profileMenuOptions = document.querySelector('ul.profile-menu-options');
-                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
-                profileMenuOptions.classList.add('opacity-0', 'scale-95');
-
-                // Wait for animation to finish before hiding
-                setTimeout(() => {
-                    profileMenuOptions.classList.remove('flex');
-                    profileMenuOptions.classList.add('hidden');
-                }, 300);
+                closeMenu();
             }
         });
     });
