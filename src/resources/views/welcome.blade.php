@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkoStock</title>
+    <title>EcoStock</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -13,7 +13,7 @@
 
         <div class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold">
             <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
-                EkoStock
+                EcoStock
             </button>
 
             <div class="flex flex-row items-center gap-6">
@@ -72,7 +72,7 @@
             <div class="w-full relative">
                 <img src="/images/main-page-image.jpg" alt="Main Page Image">
                 <div class="top-[40%] left-[10%] flex flex-col absolute text-white">
-                    <h1 class="text-8xl font-bold">EkoStock</h1>
+                    <h1 class="text-8xl font-bold">EcoStock</h1>
                     <p class="text-6xl">Backing Farms, Building Futures.</p>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                 <div class="flex flex-row gap-20">
                     <div class="flex flex-col gap-2">
                         <span class="font-bold text-lg">Contact Us</span>
-                        <span>support@ekostock.com</span>
+                        <span>support@ecostock.com</span>
                         <span>+386 1 234 567</span>
                         <span>Ljubljana, Slovenia</span>
                     </div>
