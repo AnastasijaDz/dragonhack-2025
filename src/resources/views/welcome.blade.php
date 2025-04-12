@@ -21,7 +21,7 @@
                     About us
                 </button>
                 <button class="flex items-center p-4 rounded-md hover:bg-green-700">
-                    Investemnts
+                    Investments
                 </button>
                 <button class="flex items-center p-4 rounded-md hover:bg-green-700">
                     ROI Calculator
