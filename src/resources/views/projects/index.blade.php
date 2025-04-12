@@ -14,10 +14,12 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $project->name }}</h5>
-                                <p class="card-text">{{ $project->description }}</p>
-                                <p class="card-text">{{ $project->price }}</p>
-                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary">View Project</a>
+                                <h5 class="card-title">Title: {{ $project->name }}</h5>
+                                <p class="card-text">Landlord name: {{ $project->landlord->name }}</p>
+                                <p class="card-text">Descriptio{{ $project->description }}</p>
+                                <p class="card-text">Broj dostupnih sadnic: {{ $project->amount }}</p>
+                                <p class="card-text">Cena jedne sadnice: {{ $project->price }}</p>
+                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary">About</a>
                             </div>
                         </div>
                     </div>
