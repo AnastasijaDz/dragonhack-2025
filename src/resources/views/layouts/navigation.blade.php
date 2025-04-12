@@ -1,100 +1,147 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
+<header class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl">
+    <button class="flex items-center hover:bg-green-700 p-4 rounded-md">
+        EcoStock
+    </button>
+
+    <ul class="flex flex-row items-center gap-6">
+        <li>
+            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                About us
+            </button>
+        </li>
+        <li>
+            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                Investments
+            </button>
+        </li>
+        <li>
+            <button class="flex items-center p-4 rounded-md hover:bg-green-700 h-full">
+                FAQ
+            </button>
+        </li>
+    </ul>
+
+    <button class="profile-info flex flex-row gap-6 items-center p-4 rounded-md hover:bg-green-700">
+        <img class="rounded-full" src="https://picsum.photos/id/237/64/64" />
+        <span>Aleksa Sibinović</span>
+        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.7463 0H7.26612C2.71385 0 0 2.7125 0 7.2625V17.725C0 22.2875 2.71385 25 7.26612 25H17.7338C22.2861 25 25 22.2875 25 17.7375V7.2625C25.0125 2.7125 22.2986 0 17.7463 0ZM18.7593 19.0625H6.25312C5.74036 19.0625 5.31515 18.6375 5.31515 18.125C5.31515 17.6125 5.74036 17.1875 6.25312 17.1875H18.7593C19.2721 17.1875 19.6973 17.6125 19.6973 18.125C19.6973 18.6375 19.2721 19.0625 18.7593 19.0625ZM18.7593 13.4375H6.25312C5.74036 13.4375 5.31515 13.0125 5.31515 12.5C5.31515 11.9875 5.74036 11.5625 6.25312 11.5625H18.7593C19.2721 11.5625 19.6973 11.9875 19.6973 12.5C19.6973 13.0125 19.2721 13.4375 18.7593 13.4375ZM18.7593 7.8125H6.25312C5.74036 7.8125 5.31515 7.3875 5.31515 6.875C5.31515 6.3625 5.74036 5.9375 6.25312 5.9375H18.7593C19.2721 5.9375 19.6973 6.3625 19.6973 6.875C19.6973 7.3875 19.2721 7.8125 18.7593 7.8125Z"
+                fill="white" />
+        </svg>
+    </button>
+</header>
+
+<div class="relative">
+    <ul
+        class="profile-menu-options flex-col absolute z-10 right-12 top-4 bg-white py-4 font-semibold text-black rounded-xl shadow-lg hidden opacity-0 transition-all duration-300 ease-in-out transform scale-95">
+        <li class="w-full">
+            <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                <div class="w-8 h-8">
+                    <img class="w-full h-full" src="/svgs/card.svg">
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <p>My portfolio</p>
+            </button>
+        </li>
+        <li class="w-full">
+            <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                <div class="w-8 h-8">
+                    <img class="w-full h-full" src="/svgs/settings.svg">
                 </div>
-            </div>
+                <p>Settings</p>
+            </button>
+        </li>
+        <li class="w-full">
+            <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                <div class="w-8 h-8">
+                    <img class="w-full h-full" src="/svgs/logout.svg">
+                </div>
+                <p>Log out</p>
+            </button>
+        </li>
+    </ul>
+</div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+<script>
+    const profileInfoButton = document.querySelector('button.profile-info');
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+    const openMenuDropdown = () => {
+        const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+        const overlay = document.querySelector('div.menu-open-overlay');
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+        if (profileMenuOptions.classList.contains('hidden')) {
+            // Show menu
+            profileMenuOptions.classList.remove('hidden');
+            profileMenuOptions.classList.add('flex');
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+            // Wait a tiny bit to trigger the animation
+            setTimeout(() => {
+                profileMenuOptions.classList.remove('opacity-0', 'scale-95');
+                profileMenuOptions.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        } else {
+            // Hide menu
+            profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+            profileMenuOptions.classList.add('opacity-0', 'scale-95');
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                profileMenuOptions.classList.remove('flex');
+                profileMenuOptions.classList.add('hidden');
+            }, 300);
+        }
+    };
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+    document.addEventListener('DOMContentLoaded', () => {
+        profileInfoButton.addEventListener('click', openMenuDropdown);
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+        // Close the menu when clicking outside of it
+        document.addEventListener('click', (event) => {
+            const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+            const overlay = document.querySelector('div.menu-open-overlay');
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
+            if (!profileInfoButton.contains(event.target) && !profileMenuOptions.contains(event.target)) {
+                // Hide menu
+                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+                profileMenuOptions.classList.add('opacity-0', 'scale-95');
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                // Wait for animation to finish before hiding
+                setTimeout(() => {
+                    profileMenuOptions.classList.remove('flex');
+                    profileMenuOptions.classList.add('hidden');
+                }, 300);
+            }
+        });
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+        // Close the menu when clicking on a menu item
+        const menuItems = document.querySelectorAll('ul.profile-menu-options li button');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+                profileMenuOptions.classList.add('opacity-0', 'scale-95');
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
+                // Wait for animation to finish before hiding
+                setTimeout(() => {
+                    profileMenuOptions.classList.remove('flex');
+                    profileMenuOptions.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Close the menu when pressing the Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+                profileMenuOptions.classList.remove('opacity-100', 'scale-100');
+                profileMenuOptions.classList.add('opacity-0', 'scale-95');
+
+                // Wait for animation to finish before hiding
+                setTimeout(() => {
+                    profileMenuOptions.classList.remove('flex');
+                    profileMenuOptions.classList.add('hidden');
+                }, 300);
+            }
+        });
+    });
+</script>
