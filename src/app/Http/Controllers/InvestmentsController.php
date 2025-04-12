@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Investment;
+use App\Models\Project;
 use App\Models\Token;
 use App\Services\TokenService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +22,8 @@ class InvestmentsController extends Controller
 
     public function index(Request $request): View
     {
-        $investments = Investment::all();
+        $user = Auth::user();
+        $investments = Investment::with(['project', 'tokens'])->where('investor_id', $user->profile()->id)->get();
         return view('investments.index', compact('investments'));
     }
 
