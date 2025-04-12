@@ -40,7 +40,15 @@
                     <div class="w-8 h-8">
                         <img class="w-full h-full" src="/svgs/card.svg">
                     </div>
-                    <p>My portfolio</p>
+                    <p>My Portfolio</p>
+                </button>
+            </li>
+            <li class="w-full">
+                <button class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
+                    <div class="w-8 h-8">
+                        <img class="w-full h-full fill-black" src="/svgs/dollar-square.svg">
+                    </div>
+                    <p>Manage Investments</p>
                 </button>
             </li>
             <li class="w-full">
