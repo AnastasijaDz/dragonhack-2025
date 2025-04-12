@@ -6,6 +6,7 @@ use App\Models\Investor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class InvestorsController extends Controller
 {
@@ -15,9 +16,10 @@ class InvestorsController extends Controller
         return view('investors.index', compact('investors'));
     }
 
-    public function show(int $id): View
+    public function show(): View
     {
-        $investor = Investor::findOrFail($id);
+        $user = Auth::user();
+        $investor = Investor::with('user')->findOrFail($user->profile()->id);
         return view('investors.show', compact('investor'));
     }
 
