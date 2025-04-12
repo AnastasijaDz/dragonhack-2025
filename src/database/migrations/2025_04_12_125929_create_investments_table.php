@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('investments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('investitor_id')->constrained();
+            $table->foreignId('investor_id')->constrained();
             $table->foreignId('project_id')->constrained();
             $table->timestamps();
         });
