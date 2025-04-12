@@ -184,5 +184,13 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         profileInfoButton.addEventListener('click', openMenuDropdown);
+
+        document.querySelector('div.menu-open-overlay').addEventListener('click', () => {
+            const profileMenuOptions = document.querySelector('ul.profile-menu-options');
+            profileMenuOptions.classList.remove('flex');
+            profileMenuOptions.classList.add('hidden');
+
+            document.querySelector('div.menu-open-overlay').classList.add('hidden');
+        });
     });
 </script>
