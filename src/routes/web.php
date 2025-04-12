@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
-use App\Http\Controllers\LandlordsController;
 use App\Http\Controllers\InvestmentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\InvestorsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,7 +27,7 @@ Route::get('/investments', [InvestmentsController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('investments');
 
-Route::get('/my-profile', [LandlordsController::class, 'show'])
+Route::get('/my-profile', [InvestorsController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('my-profile');
 
