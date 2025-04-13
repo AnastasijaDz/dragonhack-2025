@@ -56,6 +56,7 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             /***************************************
@@ -119,7 +120,7 @@
                             'rgba(34, 197, 94, 0.7)',  // green-600
                             'rgba(59, 130, 246, 0.7)', // blue-500
                             'rgba(234, 88, 12, 0.7)',  // orange-600
-                            'rgba(229, 62, 62, 0.7)'   // red-600; add more colors if needed
+                            'rgba(229, 62, 62, 0.7)'   // red-600
                         ],
                         borderColor: [
                             'rgba(34, 197, 94, 1)',
@@ -135,9 +136,34 @@
                     plugins: {
                         legend: {
                             position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    const value = context.raw;
+                                    const total = context.dataset.data.reduce((acc, data) => acc + data, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${value}€ (${percentage}%)`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            formatter: (value, ctx) => {
+                                const total = ctx.dataset.data.reduce((acc, data) => acc + data, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${percentage}%`;
+                            },
+                            color: '#ffffff',
+                            anchor: 'center',
+                            align: 'center',
+                            font: {
+                                size: 20,    // (text-xl)
+                                weight: 'bold'
+                            }
                         }
                     }
-                }
+                },
+                plugins: [ChartDataLabels]
             });
         });
     </script>
