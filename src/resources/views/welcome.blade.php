@@ -101,9 +101,53 @@
                     </div>
                 </div>
             </div>
-            <div
-                class="menu-open-overlay hidden opacity-0 transition-all duration-300 ease-in-out absolute w-full h-full top-0 bg-black bg-opacity-50">
+
+            <div class="flex items-center mb-16 w-full"></div>
+            <div class="w-[90%] relative flex flex-col gap-8 p-12 rounded-2xl ml-20">
+                <h2 class="text-5xl text-green-700 font-extrabold text-left">Frequently Asked Questions</h2>
+                <div class="flex flex-col gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">How do I start investing?</h3>
+                        <p class="text-black">Create an account, browse available projects, and choose your investment. You
+                            can start with as little as €100.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">How are returns distributed?</h3>
+                        <p class="text-black">Returns are distributed proportionally to your investment share, typically on
+                            a quarterly basis after harvest.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">What happens if a crop fails?</h3>
+                        <p class="text-black">Our insurance coverage protects up to 80% of your investment against crop
+                            failures and natural disasters.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Can I sell my investment?</h3>
+                        <p class="text-black">Yes, you can transfer your tokens to other investors through our platform at
+                            any time.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">What types of farms can I invest in?</h3>
+                        <p class="text-black">We partner with various eco-friendly farms including organic produce,
+                            sustainable livestock, and regenerative agriculture projects.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">How do you verify farmers?</h3>
+                        <p class="text-black">All farmers undergo thorough background checks, including verification of
+                            their farming experience, land ownership, and sustainable practices.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border-2">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">What are the expected returns?</h3>
+                        <p class="text-black">Returns vary by project but typically range from 8-15% annually, depending on
+                            crop type and market conditions.</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div
+            class="menu-open-overlay hidden opacity-0 transition-all duration-300 ease-in-out absolute w-full h-full top-0 bg-black bg-opacity-50">
+        </div>
+    </div>
     </div>
 @endsection
