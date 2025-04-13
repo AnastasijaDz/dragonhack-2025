@@ -8,7 +8,8 @@ class Income extends Model
 {
     protected $fillable = ['project_id', 'income_amount'];
 
-    public function project() {
+    public function project()
+    {
         return $this->belongsTo(Project::class, 'project_id', 'id');
     }
 }

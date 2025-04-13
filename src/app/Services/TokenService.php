@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Investment;
 use App\Models\Investor;
+use App\Models\User;
 use App\Models\Token;
 use Random\RandomException;
 
@@ -22,18 +23,17 @@ class TokenService
 
     public function transferTokensToInvestorByEmail(array $tokenIds, string $recipientEmail, int $projectId): void
     {
-        $recipientInvestor = Investor::where('email', $recipientEmail)->firstOrFail();
+        $user = User::where('email', $recipientEmail)->firstOrFail();
+        $recipientInvestor = Investor::where('user_id', $user->id)->firstOrFail();
 
         $recipientInvestment = Investment::where('investor_id', $recipientInvestor->id)
             ->where('project_id', $projectId)
             ->first();
 
-        if (!$recipientInvestment) {
-            $recipientInvestment = Investment::create([
-                'investor_id' => $recipientInvestor->id,
-                'project_id' => $projectId,
-            ]);
-        }
+        $recipientInvestment = Investment::create([
+            'investor_id' => $recipientInvestor->id,
+            'project_id' => $projectId,
+        ]);
 
         Token::whereIn('id', $tokenIds)
             ->update(['investment_id' => $recipientInvestment->id]);

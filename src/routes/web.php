@@ -31,14 +31,26 @@ Route::get('/my-portfolio', [InvestorsController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('my-portfolio');
 
+Route::get('/investments/{investment}/tokens', [InvestmentsController::class, 'getTokens'])
+    ->middleware(['auth', 'verified'])
+    ->name('get-tokens');
+
+Route::post('/tokens/transfer', [InvestmentsController::class, 'transferTokens'])
+    ->middleware(['auth', 'verified'])
+    ->name('transfer-tokens');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::view('/about', 'aboutus.index')->name('about');
+
 Route::post('/calculate', [CalculatorController::class, 'calculate']);
 
 Route::get('/average-retail-cost', [CalculatorController::class, 'averageRetailCost']);
+
+Route::post('/invest', [InvestmentsController::class, 'store'])->name('investments.store');
 
 require __DIR__.'/auth.php';
