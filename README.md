@@ -53,13 +53,13 @@ The application is containerized using Docker with the following services:
 
 ### Installation Steps
 
-1. Add the following to your `/etc/hosts` file: `127.0.0.1 dragonhack2025-local`
+1. Add the following to your `/etc/hosts` file: `127.0.0.1 dragonhack2025.local`
 2. Clone the repository:
    ```bash
    git clone <repository-url>
 3. Navigate to the project directory
 4. Run docker-compose up -d to start all services
-5. The application will be available at http://dragonhack.local
+5. The application will be available at http://dragonhack2025.local
 6. PHPMyAdmin is accessible at http://localhost:8080
 
 
