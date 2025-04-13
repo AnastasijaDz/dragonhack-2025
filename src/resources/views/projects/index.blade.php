@@ -7,7 +7,7 @@
                 transform: scale(0);
                 opacity: 0;
             }
-            40% {
+            30% {
                 transform: scale(1.1);
                 opacity: 1;
             }
@@ -21,7 +21,7 @@
                 transform: scale(1);
                 opacity: 1;
             }
-            40% {
+            30% {
                 transform: scale(0.9);
                 opacity: 0.7;
             }
