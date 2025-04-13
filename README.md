@@ -33,6 +33,7 @@ Your investments are backed by a transparent model and direct communication with
 - **CSS Framework:** Tailwind CSS  
 - **Containerization:** Docker  
 - **Package Manager:** Composer (PHP), NPM (Node.js)
+- **Blockchain tokenization:** Midnight
 
 ## System Architecture
 
