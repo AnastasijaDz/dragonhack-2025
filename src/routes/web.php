@@ -31,6 +31,14 @@ Route::get('/my-portfolio', [InvestorsController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('my-portfolio');
 
+Route::get('/investments/{investment}/tokens', [InvestmentsController::class, 'getTokens'])
+    ->middleware(['auth', 'verified'])
+    ->name('get-tokens');
+
+Route::post('/tokens/transfer', [InvestmentsController::class, 'transferTokens'])
+    ->middleware(['auth', 'verified'])
+    ->name('transfer-tokens');
+    
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

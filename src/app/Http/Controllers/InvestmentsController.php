@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Investment;
 use App\Models\Project;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Token;
 use App\Services\TokenService;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class InvestmentsController extends Controller
@@ -29,6 +30,82 @@ class InvestmentsController extends Controller
             ->where('investor_id', $investorId)
             ->get();
         return view('investments.index', compact('investments'));
+    }
+    
+    public function getTokens(Request $request, $investmentId): JsonResponse
+    {
+        try {
+            $user = Auth::user();
+            $investorId = $user->investor ? $user->investor->id : null;
+            
+            $investment = Investment::where('id', $investmentId)
+                ->where('investor_id', $investorId)
+                ->firstOrFail();
+            
+            $tokens = $investment->tokens;
+            
+            return response()->json([
+                'success' => true,
+                'tokens' => $tokens
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to load tokens: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function transferTokens(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'token_ids' => 'required|array',
+                'token_ids.*' => 'required|integer|exists:tokens,id',
+                'recipient_email' => 'required|email',
+                'project_id' => 'required|integer|exists:projects,id'
+            ]);
+            
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            
+            $user = Auth::user();
+            $investorId = $user->investor ? $user->investor->id : null;
+            
+            $tokenCount = Token::whereIn('id', $request->token_ids)
+                ->whereHas('investment', function ($query) use ($investorId) {
+                    $query->where('investor_id', $investorId);
+                })
+                ->count();
+            
+            if ($tokenCount !== count($request->token_ids)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You do not own all of these tokens'
+                ], 403);
+            }
+            
+            $this->tokenService->transferTokensToInvestorByEmail(
+                $request->token_ids,
+                $request->recipient_email,
+                $request->project_id
+            );
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Tokens transferred successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to transfer tokens: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function show(int $id): View
@@ -96,20 +173,5 @@ class InvestmentsController extends Controller
 
         return redirect()->route('investments.index')
             ->with('success', 'Investment deleted successfully!');
-    }
-
-    public function transfer(Request $request, int $tokenId): RedirectResponse
-    {
-        $data = $request->validate([
-            'new_investment_id' => 'required|exists:investments,id'
-        ]);
-
-        $token = Token::findOrFail($tokenId);
-        $newInvestment = Investment::findOrFail($data['new_investment_id']);
-
-        $this->tokenService->transferToken($token, $newInvestment);
-
-        return redirect()->back()
-            ->with('success', 'Token transferred successfully!');
     }
 }
