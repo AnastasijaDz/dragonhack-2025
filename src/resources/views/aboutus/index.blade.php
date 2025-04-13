@@ -44,19 +44,19 @@
 
     <section id="contact" class="py-16 px-4 bg-gray-100">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Contact Us</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Let's Build Something Great Together</h2>
             <div class="flex flex-col items-center space-y-4 text-lg text-gray-700">
                 <p class="flex items-center">
                     <i class="fas fa-envelope w-8"></i>
-                    <span>Email: info@ecostock.com</span>
+                    <span><strong>Email:</strong> info@ecostock.com</span>
                 </p>
                 <p>
                     <i class="fas fa-phone mr-2"></i>
-                    Phone: +386 1 234 5678
+                    <strong>Phone:</strong> +386 1 234 5678
                 </p>
                 <p>
                     <i class="fas fa-map-marker-alt mr-2"></i>
-                    Address: Technology Park 19<br>
+                    <strong>Address:</strong> Technology Park 19<br>
                     1000 Ljubljana, Slovenia
                 </p>
             </div>
