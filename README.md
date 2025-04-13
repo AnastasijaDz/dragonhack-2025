@@ -22,7 +22,7 @@ Easily buy, sell, and transfer your shares in projects with seamless digital own
 ## 🔐 Investor Safety
 Your investments are backed by a transparent model and direct communication with project owners. Every investment is optionally covered by an insurance policy for natural disasters, protecting up to 80% of your invested amount.
 
-# 🛠️ EcoStock Technical Documentation#
+# 🛠️ EcoStock Technical Documentation
 
 ## Tech Stack
 
@@ -30,37 +30,19 @@ Your investments are backed by a transparent model and direct communication with
 - **Database:** MySQL 8.0  
 - **Web Server:** Nginx  
 - **Frontend:** Laravel Blade templating with JavaScript  
+- **CSS Framework:** Tailwind CSS  
 - **Containerization:** Docker  
-- **Package Manager:** Composer (PHP), NPM (Node.js)  
+- **Package Manager:** Composer (PHP), NPM (Node.js)
 
 ## System Architecture
 
 The application is containerized using Docker with the following services:
 
-### Laravel App Container (`app`)
-
-- Runs PHP-FPM and the Laravel application  
-- Handles API endpoints, business logic, and data management  
-
-### Web Server (`nginx`)
-
-- Serves the application on port **80**  
-- Handles HTTP requests and routes them to the PHP-FPM service  
-
-### Database (`mysql`)
-
-- MySQL 8.0 database for storing application data  
-- Persists data using a named volume  
-
-### Database Management (`phpmyadmin`)
-
-- Web interface for managing the MySQL database  
-- Accessible at [http://localhost:8080](http://localhost:8080)  
-
-### Node.js Environment (`node`)
-
-- Provides **Node.js 20** for frontend asset compilation  
-- Used for JavaScript dependency management and build processes  
+- **Laravel App Container (app):** PHP-FPM running the Laravel application, handling API endpoints and business logic.
+- **Web Server (nginx):** Serves the application on port 80, routing HTTP requests to PHP-FPM.
+- **Database (mysql):** MySQL 8.0 for data storage with persistent volumes.
+- **Database Management (phpmyadmin):** Web interface for managing MySQL, accessible at [http://localhost:8080](http://localhost:8080).
+- **Node.js Environment (node):** Node.js 20 for asset compilation and JavaScript dependency management.
 
 ## Development Setup
 
