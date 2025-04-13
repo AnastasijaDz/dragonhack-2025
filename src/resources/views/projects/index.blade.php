@@ -36,6 +36,20 @@
         .animate-whoopOut {
             animation: whoopOut 0.3s ease-in forwards;
         }
+        #toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #166534;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
     </style>
 
     <div class="p-10">
@@ -78,6 +92,8 @@
             </ul>
         @endif
     </div>
+
+    <div id="toast">Investment submitted successfully!</div>
 
     <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden transition-opacity duration-300 ease-out" aria-hidden="true">
         <div id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
@@ -272,6 +288,9 @@
                 }, 300);
             };
 
+            // Toast notification element
+            const toast = document.getElementById('toast');
+
             document.addEventListener('click', (e) => {
                 if (e.target === calcModal) {
                     closeCalcModalFunc();
@@ -315,17 +334,6 @@
                 closeInvestModalFunc();
             });
 
-            investTreeCount.addEventListener('input', () => {
-                console.log("investTreeCount changed:", investTreeCount.value, "selectedProjectPrice:", selectedProjectPrice);
-                const numTrees = parseFloat(investTreeCount.value);
-                if (!isNaN(numTrees) && selectedProjectPrice) {
-                    const totalCost = numTrees * selectedProjectPrice;
-                    calculatedInvestment.textContent = `Calculated Investment: €${totalCost.toFixed(2)}`;
-                } else {
-                    calculatedInvestment.textContent = 'Calculated Investment: €--';
-                }
-            });
-
             document.querySelectorAll('.invest-button').forEach(button => {
                 button.addEventListener('click', function() {
                     const li = this.closest('li');
@@ -338,9 +346,19 @@
                 });
             });
 
+            investTreeCount.addEventListener('input', () => {
+                console.log("investTreeCount changed:", investTreeCount.value, "selectedProjectPrice:", selectedProjectPrice);
+                const numTrees = parseFloat(investTreeCount.value);
+                if (!isNaN(numTrees) && selectedProjectPrice) {
+                    const totalCost = numTrees * selectedProjectPrice;
+                    calculatedInvestment.textContent = `Calculated Investment: €${totalCost.toFixed(2)}`;
+                } else {
+                    calculatedInvestment.textContent = 'Calculated Investment: €--';
+                }
+            });
+
             calcForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-
                 if (averageRetailCost === null) {
                     alert('Average retail cost is not available yet. Please try again shortly.');
                     return;
@@ -349,13 +367,10 @@
                     alert('Project price is not available.');
                     return;
                 }
-
                 const treeCount = parseFloat(document.getElementById('treeCount').value);
                 const investmentYears = parseInt(document.getElementById('investmentYears').value);
-
                 const totalCost = treeCount * selectedProjectPrice;
                 const annualIncome = treeCount * yieldPerTree * averageRetailCost;
-
                 const cumulativeNetProfit = [];
                 const labels = [];
                 for (let year = 1; year <= investmentYears; year++) {
@@ -364,7 +379,6 @@
                     labels.push('Year ' + year);
                     cumulativeNetProfit.push(netProfit);
                 }
-
                 if (incomeChart) { incomeChart.destroy(); }
                 incomeChart = new Chart(incomeChartCanvas.getContext('2d'), {
                     type: 'line',
@@ -384,7 +398,6 @@
                         }
                     }
                 });
-
                 let payback;
                 if (annualIncome <= 0) {
                     payback = 'Never';
@@ -393,9 +406,7 @@
                 } else {
                     payback = (totalCost / annualIncome).toFixed(1);
                 }
-
                 const finalNetProfit = (annualIncome * investmentYears) - totalCost;
-
                 paybackPeriodElem.textContent = payback;
                 profitPeriodElem.textContent = investmentYears;
                 netProfitElem.textContent = finalNetProfit.toFixed(2);
@@ -419,7 +430,10 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        alert('Investment submitted successfully!');
+                        toast.style.opacity = 1;
+                        setTimeout(() => {
+                            toast.style.opacity = 0;
+                        }, 3000);
                         closeInvestModalFunc();
                     })
                     .catch(error => {
