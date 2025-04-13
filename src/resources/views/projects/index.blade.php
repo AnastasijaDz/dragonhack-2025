@@ -122,9 +122,11 @@
                         <!-- Action Buttons -->
                         <div class="flex flex-col justify-evenly gap-4">
                             <button class="calc-button py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
+                                <i class="fa-solid fa-calculator text-white mr-1"></i>
                                 Calculate
                             </button>
-                            <button class="invest-button py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
+                            <button class="invest-button gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
+                                <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
                                 Invest
                             </button>
                         </div>
@@ -137,7 +139,7 @@
     <!--========================================
       Calculation Modal
     ========================================-->
-    <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden" aria-hidden="true">
+    <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm" aria-hidden="true">
         <div id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
              class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
 
@@ -187,12 +189,14 @@
 
                     <!-- Calculation Button with Spinner -->
                     <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-2">
+                        <i class="fa-solid fa-calculator text-white ml-1"></i>
                         Calculate
                     </button>
                 </form>
 
                 <!-- Button to Open Investment Modal -->
                 <button id="goToInvestBtn" class="w-full py-2 bg-blue-800 hover:bg-blue-700 text-white font-bold rounded mt-4">
+                    <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
                     Go to Invest
                 </button>
             </div>
@@ -218,7 +222,7 @@
     <!--========================================
       Investment Modal
     ========================================-->
-    <div id="investModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden" aria-hidden="true">
+    <div id="investModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm" aria-hidden="true">
         <div id="investContent" role="dialog" aria-modal="true" aria-labelledby="investModalTitle"
              class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-2xl transform scale-0">
 

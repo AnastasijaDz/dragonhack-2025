@@ -8,7 +8,7 @@
         </button>
     </form>
 
-    <nav role="navigation" aria-label="Main Navigation">
+    <nav class="ml-32" role="navigation" aria-label="Main Navigation">
         <ul class="flex flex-row items-center gap-6 h-full">
             <li class="h-full" tabindex="-1">
                 <form method="GET" action="{{ route('home') }}"
