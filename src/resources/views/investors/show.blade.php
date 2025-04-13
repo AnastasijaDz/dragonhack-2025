@@ -3,8 +3,8 @@
 @section('head')
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-papNM8P8DlHOq1ARFaQOjYlpH80YAF06lmqzKwbI94uIg/NSWVhhaQcGh2Qs5kn3Z5d9vSB2+9Yaj8Qbx9Zfkw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-papNM8P8DlHOq1ARFaQOjYlpH80YAF06lmqzKwbI94uIg/NSWVhhaQcGh2Qs5kn3Z5d9vSB2+9Yaj8Qbx9Zfkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('content')
@@ -15,17 +15,17 @@
         <div class="w-[160px] h-[160px] mb-8 mt-[-80px]">
             <img src="/images/professional-investor-profile-picture.png" class="h-full w-full rounded-full">
         </div>
-        <h1 class="text-2xl font-bold">{{ $investor->name }}</h1>
-        <h2 class="text-lg font-semibold text-green-800 mb-16">High Ranking Investor</h2>
+        <h1 class="text-3xl font-bold mb-4">{{ $investor->name }}</h1>
+        <h2 class="text-xl font-semibold text-green-800 mb-16">High Ranking Investor</h2>
         <div class="flex flex-col gap-2 shadow-lg p-8 rounded-2xl border-2 w-[40%]">
             @if($investor->user)
-                <div class="flex justify-between">
-                    <span class="font-bold">Invested:</span>
-                    <span class="font-bold text-green-800">{{ $investor->total_invested }}€</span>
+                <div class="flex justify-between text-2xl font-black">
+                    <span>Earned back:</span>
+                    <span class="text-green-800">{{ $investor->earned_price }}€</span>
                 </div>
-                <div class="flex justify-between">
-                    <span class="font-bold">Earned back:</span>
-                    <span class="font-bold text-green-800">{{ $investor->earned_price }}€</span>
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Invested:</span>
+                    <span class="text-green-800">{{ $investor->total_invested }}€</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-bold">Most profitable project so far:</span>
