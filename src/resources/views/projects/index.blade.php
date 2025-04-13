@@ -126,10 +126,10 @@
                 <canvas id="incomeChart" class="w-full h-64 mt-5"></canvas>
                 <div id="investmentResults" class="mt-4">
                     <p class="text-black text-lg">
-                        The total cost is expected to be paid back in <span class="text-green-800" id="paybackPeriod">--</span> years.
+                        The total cost is expected to be paid back in <span class="text-green-800 font-bold" id="paybackPeriod">--</span> years.
                     </p>
                     <p class="text-black text-lg">
-                        Net profit after <span class="text-green-800" id="profitPeriod">--</span> years is <span class="text-green-800" id="netProfit">--</span> €.
+                        Net profit after <span class="text-green-800 font-bold" id="profitPeriod">--</span> years is <span class="text-green-800 font-bold" id="netProfit">--</span> €.
                     </p>
                 </div>
             </div>
