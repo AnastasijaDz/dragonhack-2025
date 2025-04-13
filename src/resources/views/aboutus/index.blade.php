@@ -42,14 +42,38 @@
         </div>
     </section>
 
-    <section id="history" class="py-16 px-4 bg-gray-100">
+    <section id="contact" class="py-16 px-4 bg-gray-100">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Our History</h2>
-            <p class="text-lg text-gray-700 leading-relaxed">
-                Founded in 2025, EcoStock has grown from a small team of passionate investors and environmentalists to a
-                trusted platform that connects local farmers with investors committed to making a positive impact. Our
-                journey is driven by our dedication to sustainability and transparency in every investment.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Contact Us</h2>
+            <div class="flex flex-col items-center space-y-4 text-lg text-gray-700">
+                <p class="flex items-center">
+                    <i class="fas fa-envelope w-8"></i>
+                    <span>Email: info@ecostock.com</span>
+                </p>
+                <p>
+                    <i class="fas fa-phone mr-2"></i>
+                    Phone: +386 1 234 5678
+                </p>
+                <p>
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    Address: Technology Park 19<br>
+                    1000 Ljubljana, Slovenia
+                </p>
+            </div>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" class="text-green-700 hover:text-green-600">
+                    <i class="fab fa-facebook fa-2x"></i>
+                </a>
+                <a href="#" class="text-green-700 hover:text-green-600">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+                <a href="#" class="text-green-700 hover:text-green-600">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+                <a href="#" class="text-green-700 hover:text-green-600">
+                    <i class="fab fa-instagram fa-2x"></i>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -60,6 +84,17 @@
                 At EcoStock, our mission is to empower communities by providing sustainable investment opportunities in
                 local agriculture and eco-friendly projects. We believe in using smart investments to build a greener, more
                 secure future for everyone.
+            </p>
+        </div>
+    </section>
+
+    <section id="history" class="py-16 px-4 bg-gray-100">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Our History</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                Founded in 2025, EcoStock has grown from a small team of passionate investors and environmentalists to a
+                trusted platform that connects local farmers with investors committed to making a positive impact. Our
+                journey is driven by our dedication to sustainability and transparency in every investment.
             </p>
         </div>
     </section>
