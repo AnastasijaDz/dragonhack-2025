@@ -68,7 +68,7 @@
                     <input type="hidden" id="modalProjectId" name="project_id" value="">
                     <div class="mb-4">
                         <label for="investTreeCount" class="block font-bold">Number of Trees to Invest</label>
-                        <input type="number" id="investTreeCount" name="investTreeCount" class="w-full p-2 border rounded" placeholder="Enter number of trees" required>
+                        <input type="number" id="investTreeCount" name="investTreeCount" class="w-full p-2 border rounded" placeholder="Enter number of trees" required min="0">
                         <div id="investTreeCountError" class="text-red-600 text-sm hidden">Please enter a valid number.</div>
                     </div>
                     <div class="mb-4">
