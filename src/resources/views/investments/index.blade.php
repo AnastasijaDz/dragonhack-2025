@@ -8,7 +8,7 @@
             <p class="text-gray-600">You don't have any investments yet.</p>
         @else
             @foreach ($investments as $investment)
-                <div class="flex flex-col shadow-lg w-[80%] rounded-xl overflow-hidden">
+                <div class="flex flex-col shadow-lg w-[60%] border-2 rounded-xl overflow-hidden">
                     <div class="bg-green-800 font-bold p-6 text-white text-2xl flex flex-row gap-3"><img src="/svgs/white-crypto-exchange.svg">{{ $investment->project->name ?? '—' }}</div>
                     <div class="flex flex-row p-6 bg-white justify-between">
                         <div class="flex flex-col justify-between">

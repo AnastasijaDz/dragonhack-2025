@@ -1,7 +1,7 @@
 <header
     class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl sticky top-0"
     role="banner">
-    <form method="GET" action="{{ route('home') }}" class="w-full">
+    <form method="GET" action="{{ route('home') }}">
         @csrf
         <button class="flex items-center hover:bg-green-700 focus:bg-green-700 p-4 rounded-md" tabindex="-1">
             <img src="/svgs/white-logo.svg" alt="Logo">
@@ -58,7 +58,7 @@
                     @csrf
                     <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                         <div class="w-8 h-8">
-                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                            <img class="w-full h-full" src="/svgs/dollar-square.svg" alt="Logout">
                         </div>
                         <p>My Portfolio</p>
                     </button>
@@ -69,7 +69,7 @@
                     @csrf
                     <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                         <div class="w-8 h-8">
-                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                            <img class="w-full h-full" src="/svgs/moneys.svg" alt="Logout">
                         </div>
                         <p>Manage investments</p>
                     </button>
