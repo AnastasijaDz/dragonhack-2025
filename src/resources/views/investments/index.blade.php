@@ -22,15 +22,15 @@
         }
     </style>
 
-    <div class="flex flex-col gap-8 w-full items-center">
-        <h1 class="text-3xl font-bold my-10">My Investments</h1>
+    <div class="flex flex-col gap-16 w-full items-center">
+        <h1 class="text-4xl font-bold my-14">My Investments</h1>
         @if($investments->isEmpty())
             <p class="text-gray-600">You don't have any investments yet.</p>
         @else
             @foreach ($investments->sortByDesc('created_at') as $investment)
                 <div class="flex flex-col shadow-lg w-[60%] border-2 rounded-xl overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
-                    <div class="bg-green-800 p-6 text-white text-2xl flex items-center gap-3">
-                        <img src="/svgs/white-crypto-exchange.svg" class="w-6 h-6" alt="Project Icon">
+                    <div class="bg-white p-6 text-black text-2xl border-b-2 flex items-center gap-5">
+                        <img src="/svgs/black-crypto-exchange.svg" class="w-6 h-6" alt="Project Icon">
                         <span class="font-bold">{{ $investment->project->name ?? '—' }}</span>
                     </div>
                     <div class="flex flex-col sm:flex-row p-6 bg-white justify-between">
@@ -41,10 +41,10 @@
                             <div><span class="font-bold text-black">Investment Date:</span> <span>{{ $investment->created_at->format('Y-m-d H:i') }}</span></div>
                         </div>
                         <div class="flex flex-col gap-4 mt-4 sm:mt-0">
-                            <button class="invest-button inline-flex items-center gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition"
+                            <button class="invest-button inline-flex text-center items-center gap-2 py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition"
                                     data-project-id="{{ $investment->project->id }}"
                                     data-price="{{ $investment->project->price }}">
-                                <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i> Invest More
+                                Invest More
                             </button>
                             <button class="list-tokens-button inline-flex items-center gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition"
                                     data-investment-id="{{ $investment->id }}"

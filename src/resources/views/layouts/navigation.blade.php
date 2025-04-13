@@ -1,4 +1,4 @@
-<header class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-10 shadow-xl sticky top-0" role="banner">
+<header class="px-8 min-h-20 bg-green-800 flex flex-row justify-between text-white font-bold z-20 shadow-xl sticky top-0" role="banner">
     <form method="GET" action="{{ route('home') }}">
         @csrf
         <button class="flex items-center hover:bg-green-700 focus:bg-green-700 p-4 rounded-md" tabindex="-1">
