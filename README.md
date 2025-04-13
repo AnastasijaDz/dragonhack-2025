@@ -53,7 +53,7 @@ The application is containerized using Docker with the following services:
 
 ### Installation Steps
 
-1. add `127.0.0.1 dragonhack2025-local`
+1. Add `127.0.0.1 dragonhack2025-local` to local hosts file
 2. Clone the repository:
    ```bash
    git clone <repository-url>
