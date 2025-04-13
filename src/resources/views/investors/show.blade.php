@@ -37,14 +37,14 @@
         </div>
     </div>
 
-    <div class="mt-16 w-full flex flex-col items-center">
+    <div class="mt-24 w-full flex flex-col items-center">
         <h3 class="text-xl font-bold mb-4">Your Investment Per Year</h3>
         <div class="w-[40%] p-6 shadow-lg rounded-2xl border-2 bg-white">
             <canvas id="annualInvestmentChart"></canvas>
         </div>
     </div>
 
-    <div class="mt-16 w-full flex flex-col items-center">
+    <div class="mt-24 w-full flex flex-col items-center">
         <h3 class="text-xl font-bold mb-4">Your Allocations</h3>
         <div class="w-[40%] p-6 shadow-lg rounded-2xl border-2 bg-white flex justify-center">
             <div class="w-80 h-80">
