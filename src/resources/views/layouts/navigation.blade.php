@@ -42,7 +42,7 @@
             <div class="h-12 w-12">
             <img class="w-full h-full rounded-full" src="/images/professional-investor-profile-picture.png" />
             </div>
-            <span>{{ Auth::user()->name }}</span>
+            <span>{{ Auth::user()?->name }}</span>
             <svg aria-hidden="true" width="25" height="25" viewBox="0 0 25 25" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path

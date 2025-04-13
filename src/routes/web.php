@@ -41,4 +41,6 @@ Route::post('/calculate', [CalculatorController::class, 'calculate']);
 
 Route::get('/average-retail-cost', [CalculatorController::class, 'averageRetailCost']);
 
+Route::post('/invest', [InvestmentsController::class, 'store'])->name('investments.store');
+
 require __DIR__.'/auth.php';

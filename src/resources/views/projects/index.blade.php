@@ -16,7 +16,6 @@
                 opacity: 1;
             }
         }
-
         @keyframes whoopOut {
             0% {
                 transform: scale(1);
@@ -31,7 +30,6 @@
                 opacity: 0;
             }
         }
-
         .animate-whoopIn {
             animation: whoopIn 0.5s ease-out forwards;
         }
@@ -73,7 +71,7 @@
                         </div>
                         <div class="flex flex-col flex-shrink-0 justify-evenly gap-4 w-[200px]">
                             <button class="calc-button py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Calculate</button>
-                            <button class="py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Invest</button>
+                            <button class="invest-button py-3 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold">Invest</button>
                         </div>
                     </li>
                 @endforeach
@@ -81,12 +79,12 @@
         @endif
     </div>
 
-    <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden transition-opacity duration-300 ease-out">
-        <div id="modalContent" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
-            <button id="closeCalcModal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">&times;</button>
+    <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden transition-opacity duration-300 ease-out" aria-hidden="true">
+        <div id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
+            <button id="closeCalcModal" aria-label="Close modal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">&times;</button>
             <div class="p-6 w-1/2 border-r">
-                <h2 class="text-xl font-bold">Calculate Investment</h2>
-                <form id="calcForm" class="mt-8">
+                <h2 id="modalTitle" class="text-xl font-bold">Calculate Investment</h2>
+                <form id="calcForm" class="mt-6">
                     <div class="mb-4">
                         <label for="treeCount" class="block font-bold">Number of Trees</label>
                         <input type="number" id="treeCount" name="treeCount" class="w-full p-2 border rounded" placeholder="Enter number of trees" required>
@@ -104,11 +102,12 @@
                             Data extracted from official statistics in Slovenia
                         </div>
                     </div>
-                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-8">Calculate</button>
+                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-2">Calculate</button>
                 </form>
+                <button id="goToInvestBtn" class="w-full py-2 bg-blue-800 hover:bg-blue-700 text-white font-bold rounded mt-4">Go to Invest</button>
             </div>
             <div class="p-6 w-1/2">
-                <canvas id="incomeChart" class="w-full h-64"></canvas>
+                <canvas id="incomeChart" class="w-full h-64 mt-5"></canvas>
                 <div id="investmentResults" class="mt-4">
                     <p class="text-black text-lg">
                         The total cost is expected to be paid back in <span class="text-green-800" id="paybackPeriod">--</span> years.
@@ -117,6 +116,27 @@
                         Net profit after <span class="text-green-800" id="profitPeriod">--</span> years is <span class="text-green-800" id="netProfit">--</span> €.
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="investModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden transition-opacity duration-300 ease-out" aria-hidden="true">
+        <div id="investContent" role="dialog" aria-modal="true" aria-labelledby="investModalTitle" class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
+            <button id="closeInvestModal" aria-label="Close invest modal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">&times;</button>
+            <div class="p-6 w-full">
+                <h2 id="investModalTitle" class="text-xl font-bold">Invest in Project</h2>
+                <form id="investForm" class="mt-6">
+                    <div class="mb-4">
+                        <label for="investTreeCount" class="block font-bold">Number of Trees to Invest</label>
+                        <input type="number" id="investTreeCount" name="investTreeCount" class="w-full p-2 border rounded" placeholder="Enter number of trees" required>
+                    </div>
+                    <div class="mb-4">
+                        <p id="calculatedInvestment" class="text-lg font-semibold text-gray-700">
+                            Calculated Investment: €--
+                        </p>
+                    </div>
+                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-6">Submit Investment</button>
+                </form>
             </div>
         </div>
     </div>
@@ -137,6 +157,14 @@
             const paybackPeriodElem = document.getElementById('paybackPeriod');
             const profitPeriodElem = document.getElementById('profitPeriod');
             const netProfitElem = document.getElementById('netProfit');
+            const goToInvestBtn = document.getElementById('goToInvestBtn');
+
+            const investModal = document.getElementById('investModal');
+            const investContent = document.getElementById('investContent');
+            const closeInvestModal = document.getElementById('closeInvestModal');
+            const investForm = document.getElementById('investForm');
+            const investTreeCount = document.getElementById('investTreeCount');
+            const calculatedInvestment = document.getElementById('calculatedInvestment');
 
             let averageRetailCost = null;
             let selectedProjectPrice = null;
@@ -161,11 +189,12 @@
                 }
             });
 
-            const openModal = () => {
+            const openCalcModal = () => {
                 calcModal.classList.remove('hidden');
                 modalContent.classList.remove('scale-0');
                 modalContent.classList.remove('animate-whoopOut');
                 modalContent.classList.add('animate-whoopIn');
+                calcModal.setAttribute('aria-hidden', 'false');
 
                 fetch('/average-retail-cost', {
                     method: 'GET',
@@ -176,7 +205,7 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        if(data.average_retail_cost) {
+                        if (data.average_retail_cost) {
                             averageRetailCost = parseFloat(data.average_retail_cost);
                             retailCostValue.textContent = averageRetailCost.toFixed(2);
                         }
@@ -184,14 +213,17 @@
                     .catch(console.error);
             };
 
-            const closeModal = () => {
+            const closeCalcModalFunc = (callback) => {
+                modalContent.classList.remove('animate-whoopIn');
                 modalContent.classList.add('animate-whoopOut');
                 setTimeout(() => {
                     calcModal.classList.add('hidden');
                     calcForm.reset();
                     retailCostValue.textContent = '--';
                     averageRetailCost = null;
-                    selectedProjectPrice = null;
+                    if (!callback) {
+                        selectedProjectPrice = null;
+                    }
                     paybackPeriodElem.textContent = '--';
                     profitPeriodElem.textContent = '--';
                     netProfitElem.textContent = '--';
@@ -214,19 +246,97 @@
                     });
                     modalContent.classList.remove('animate-whoopOut');
                     modalContent.classList.add('scale-0');
+                    calcModal.setAttribute('aria-hidden', 'true');
+                    if (callback && typeof callback === 'function') {
+                        callback();
+                    }
                 }, 300);
             };
+
+            const openInvestModal = () => {
+                investModal.classList.remove('hidden');
+                investContent.classList.remove('scale-0');
+                investContent.classList.remove('animate-whoopOut');
+                investContent.classList.add('animate-whoopIn');
+                investModal.setAttribute('aria-hidden', 'false');
+            };
+
+            const closeInvestModalFunc = () => {
+                investContent.classList.remove('animate-whoopIn');
+                investContent.classList.add('animate-whoopOut');
+                setTimeout(() => {
+                    investModal.classList.add('hidden');
+                    investContent.classList.remove('animate-whoopOut');
+                    investContent.classList.add('scale-0');
+                    investModal.setAttribute('aria-hidden', 'true');
+                }, 300);
+            };
+
+            document.addEventListener('click', (e) => {
+                if (e.target === calcModal) {
+                    closeCalcModalFunc();
+                }
+                if (e.target === investModal) {
+                    closeInvestModalFunc();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (!calcModal.classList.contains('hidden')) {
+                        closeCalcModalFunc();
+                    }
+                    if (!investModal.classList.contains('hidden')) {
+                        closeInvestModalFunc();
+                    }
+                }
+            });
 
             calcButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const li = this.closest('li');
+                    console.log("Project Data: ", li ? li.dataset : "LI not found");
                     modalProjectId.value = li ? li.dataset.projectId : '';
                     selectedProjectPrice = li ? parseFloat(li.dataset.price) : null;
-                    openModal();
+                    openCalcModal();
+                });
+            });
+            closeCalcModal.addEventListener('click', () => { closeCalcModalFunc(); });
+
+            goToInvestBtn.addEventListener('click', () => {
+                closeCalcModalFunc(() => {
+                    openInvestModal();
+                    investTreeCount.value = '';
+                    calculatedInvestment.textContent = 'Calculated Investment: €--';
                 });
             });
 
-            closeCalcModal.addEventListener('click', closeModal);
+            closeInvestModal.addEventListener('click', () => {
+                closeInvestModalFunc();
+            });
+
+            investTreeCount.addEventListener('input', () => {
+                console.log("investTreeCount changed:", investTreeCount.value, "selectedProjectPrice:", selectedProjectPrice);
+                const numTrees = parseFloat(investTreeCount.value);
+                if (!isNaN(numTrees) && selectedProjectPrice) {
+                    const totalCost = numTrees * selectedProjectPrice;
+                    calculatedInvestment.textContent = `Calculated Investment: €${totalCost.toFixed(2)}`;
+                } else {
+                    calculatedInvestment.textContent = 'Calculated Investment: €--';
+                }
+            });
+
+            document.querySelectorAll('.invest-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const li = this.closest('li');
+                    console.log("Invest Project Data:", li ? li.dataset : "LI not found");
+                    modalProjectId.value = li ? li.dataset.projectId : '';
+                    selectedProjectPrice = li ? parseFloat(li.dataset.price) : null;
+                    openInvestModal();
+                    investTreeCount.value = '';
+                    calculatedInvestment.textContent = 'Calculated Investment: €--';
+                });
+            });
 
             calcForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -289,6 +399,33 @@
                 paybackPeriodElem.textContent = payback;
                 profitPeriodElem.textContent = investmentYears;
                 netProfitElem.textContent = finalNetProfit.toFixed(2);
+            });
+
+            investForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const numInvestTrees = investTreeCount.value;
+                const projectId = modalProjectId.value;
+                const payload = {
+                    project_id: projectId,
+                    number_of_trees: numInvestTrees
+                };
+                fetch('/invest', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(payload)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('Investment submitted successfully!');
+                        closeInvestModalFunc();
+                    })
+                    .catch(error => {
+                        console.error('Error submitting investment:', error);
+                        alert('An error occurred while submitting your investment.');
+                    });
             });
         });
     </script>
