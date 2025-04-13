@@ -110,12 +110,12 @@
 
                         <!-- Project Details -->
                         <div class="flex flex-col justify-center flex-grow">
-                            <h2 class="text-3xl font-extrabold text-gray-800">{{ $project->name }}</h2>
-                            <div class="mt-2 space-y-1">
-                                <p><span class="font-bold text-gray-700">Landlord name:</span> {{ $project->landlord->name }}</p>
-                                <p><span class="font-bold text-gray-700">Description:</span> {{ $project->description }}</p>
-                                <p><span class="font-bold text-gray-700">Available Trees:</span> {{ $project->amount }}</p>
-                                <p><span class="font-bold text-gray-700">Price per Tree:</span> €{{ $project->price }}</p>
+                            <h2 class="text-3xl font-extrabold text-green-800">{{ $project->name }}</h2>
+                            <div class="flex flex-col mt-2 space-y-1 gap-1">
+                                <p class="text-black text-lg"><span class="font-bold">Landlord name:</span> {{ $project->landlord->name }}</p>
+                                <p class="text-black text-lg"><span class="font-bold">Description:</span> {{ $project->description }}</p>
+                                <p class="text-gray-600"><span class="font-bold">Available Trees:</span> {{ $project->amount }}</p>
+                                <p class="text-gray-600"><span class="font-bold">Price per Tree:</span> €{{ $project->price }}</p>
                             </div>
                         </div>
 
