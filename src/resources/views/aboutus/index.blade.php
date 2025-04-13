@@ -42,17 +42,6 @@
         </div>
     </section>
 
-    <section id="mission" class="py-16 px-4">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Our Mission</h2>
-            <p class="text-lg text-gray-700 leading-relaxed">
-                At EcoStock, our mission is to empower communities by providing sustainable investment opportunities in
-                local agriculture and eco-friendly projects. We believe in using smart investments to build a greener, more
-                secure future for everyone.
-            </p>
-        </div>
-    </section>
-
     <section id="history" class="py-16 px-4 bg-gray-100">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Our History</h2>
@@ -60,6 +49,17 @@
                 Founded in 2025, EcoStock has grown from a small team of passionate investors and environmentalists to a
                 trusted platform that connects local farmers with investors committed to making a positive impact. Our
                 journey is driven by our dedication to sustainability and transparency in every investment.
+            </p>
+        </div>
+    </section>
+
+    <section id="mission" class="py-16 px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-6">Our Mission</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                At EcoStock, our mission is to empower communities by providing sustainable investment opportunities in
+                local agriculture and eco-friendly projects. We believe in using smart investments to build a greener, more
+                secure future for everyone.
             </p>
         </div>
     </section>
