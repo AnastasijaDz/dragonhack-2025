@@ -187,16 +187,15 @@
                     </div>
 
                     <!-- Calculation Button with Spinner -->
-                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-2">
-                        <i class="fa-solid fa-calculator text-white ml-1"></i>
+                    <button type="submit" class="w-full py-2 bg-white hover:bg-gray-200 text-green-800 font-bold border-2 border-green-800 rounded mt-2">
                         Calculate
                     </button>
                 </form>
 
                 <!-- Button to Open Investment Modal -->
-                <button id="goToInvestBtn" class="w-full py-2 bg-blue-800 hover:bg-blue-700 text-white font-bold rounded mt-4">
+                <button id="goToInvestBtn" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-4">
                     <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
-                    Go to Invest
+                    Go To Invest
                 </button>
             </div>
 
