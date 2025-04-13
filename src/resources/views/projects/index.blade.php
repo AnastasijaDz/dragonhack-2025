@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /*========================================
-                      Modal Animations
-                    ========================================*/
+         Modal Animations
+        ========================================*/
         @keyframes whoopIn {
             0% {
                 transform: scale(0);
