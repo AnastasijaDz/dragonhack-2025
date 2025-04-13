@@ -22,16 +22,7 @@ Easily buy, sell, and transfer your shares in projects with seamless digital own
 ## 🔐 Investor Safety
 Your investments are backed by a transparent model and direct communication with project owners. Every investment is optionally covered by an insurance policy for natural disasters, protecting up to 80% of your invested amount.
 
-# EcoStock Technical Documentation
-
-## System Overview
-
-**EcoStock** is a Laravel-based web application that connects investors with sustainable agricultural projects. The platform provides:
-
-- Investment management  
-- Portfolio tracking  
-- ROI calculations  
-- Tokenized ownership features  
+# 🛠️ EcoStock Technical Documentation#
 
 ## Tech Stack
 
