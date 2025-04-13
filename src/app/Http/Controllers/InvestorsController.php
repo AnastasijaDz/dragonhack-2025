@@ -25,6 +25,8 @@ class InvestorsController extends Controller
         // dd($investor->most_profitable_project?->name); // Most profitable project
         // dd($investor->investments_per_year); // Most profitable project
         // dd($investor->investment_allocation); // Investment allocation
+        // dd($investor->getInvestmentYearsAttribute()); // Investment allocation
+        // dd($investor->getAnnualRateOfReturnAttribute()); // procent
         return view('investors.show', compact('investor'));
     }
 

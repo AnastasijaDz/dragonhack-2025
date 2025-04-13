@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Investor extends Model
 {
@@ -118,5 +119,27 @@ class Investor extends Model
         }
 
         return $allocation;
+    }
+
+    public function getInvestmentYearsAttribute()
+    {
+        $firstInvestment = $this->investments->sortBy('created_at')->first();
+        if (!$firstInvestment) {
+            return 0;
+        }
+        $firstDate = Carbon::parse($firstInvestment->created_at);
+        $now = Carbon::now();
+        return $now->year - $firstDate->year + 1;
+    }
+
+    public function getAnnualRateOfReturnAttribute()
+    {
+        $totalEarnings = $this->getEarnedPriceAttribute;
+        $totalInvested = $this->getTotalInvestedAttribute;
+        if ($totalInvested == 0 || $this->getInvestmentYearsAttribute == 0) {
+            return 0;
+        }
+        $arr = pow($totalEarnings / $totalInvested, 1 / $this->getInvestmentYearsAttribute) - 1;
+        return $arr * 100;
     }
 }
