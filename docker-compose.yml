@@ -3,11 +3,11 @@ version: '3.8'
 services:
   app:
     build:
-      context: ./src  # Pointing to the src folder as the build context
-      dockerfile: ../docker/php/Dockerfile  # Path to Dockerfile inside the docker/php folder
+      context: ./src
+      dockerfile: ../docker/php/Dockerfile
     container_name: laravel_app
     volumes:
-      - ./src:/var/www  # Mounting the src directory to /var/www in the container
+      - ./src:/var/www
     working_dir: /var/www
     ports:
       - "9000:9000"
@@ -29,7 +29,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./src:/var/www  # Mounting src folder to /var/www in the container
+      - ./src:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app

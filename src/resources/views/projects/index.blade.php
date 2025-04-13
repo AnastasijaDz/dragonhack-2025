@@ -3,46 +3,53 @@
 @section('content')
     <style>
         /*========================================
-          Modal Animations
-        ========================================*/
+                      Modal Animations
+                    ========================================*/
         @keyframes whoopIn {
             0% {
                 transform: scale(0);
                 opacity: 0;
             }
+
             25% {
                 transform: scale(1.1);
                 opacity: 1;
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
             }
         }
+
         @keyframes whoopOut {
             0% {
                 transform: scale(1);
                 opacity: 1;
             }
+
             25% {
                 transform: scale(0.9);
                 opacity: 0.7;
             }
+
             100% {
                 transform: scale(0);
                 opacity: 0;
             }
         }
+
         .animate-whoopIn {
             animation: whoopIn 0.5s ease-out forwards;
         }
+
         .animate-whoopOut {
             animation: whoopOut 0.3s ease-in forwards;
         }
 
         /*========================================
-          Spinner CSS
-        ========================================*/
+                      Spinner CSS
+                    ========================================*/
         .spinner {
             display: inline-block;
             width: 16px;
@@ -54,21 +61,24 @@
             vertical-align: middle;
             margin-left: 8px;
         }
+
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /*========================================
-          Modal Overlay Fade
-        ========================================*/
+                      Modal Overlay Fade
+                    ========================================*/
         #calcModal,
         #investModal {
             transition: opacity 0.3s ease-in-out;
         }
 
         /*========================================
-          Toast Styles
-        ========================================*/
+                      Toast Styles
+                    ========================================*/
         #toastContainer {
             position: fixed;
             bottom: 20px;
@@ -76,6 +86,7 @@
             transform: translateX(-50%);
             z-index: 1000;
         }
+
         .toast {
             background: #333;
             color: #fff;
@@ -103,8 +114,8 @@
                         <!-- Project Image -->
                         <div class="flex-shrink-0">
                             <div class="w-48 h-48 overflow-hidden rounded-lg">
-                                <img class="object-cover w-full h-full" src="/images/barn.png"
-                                     alt="Project Image" loading="lazy">
+                                <img class="object-cover w-full h-full" src="/images/farms/farm{{ random_int(1, 8) }}.png"
+                                    alt="Farm Image" loading="lazy">
                             </div>
                         </div>
 
@@ -112,8 +123,10 @@
                         <div class="flex flex-col justify-center flex-grow">
                             <h2 class="text-3xl font-extrabold text-green-800">{{ $project->name }}</h2>
                             <div class="flex flex-col mt-2 space-y-1 gap-1">
-                                <p class="text-black text-lg"><span class="font-bold">Landlord name:</span> {{ $project->landlord->name }}</p>
-                                <p class="text-black text-lg"><span class="font-bold">Description:</span> {{ $project->description }}</p>
+                                <p class="text-black text-lg"><span class="font-bold">Landlord name:</span>
+                                    {{ $project->landlord->name }}</p>
+                                <p class="text-black text-lg"><span class="font-bold">Description:</span>
+                                    {{ $project->description }}</p>
                                 <p class="text-gray-600"><span class="font-bold">Available Trees:</span> {{ $project->amount }}</p>
                                 <p class="text-gray-600"><span class="font-bold">Price per Tree:</span> €{{ $project->price }}</p>
                             </div>
@@ -121,11 +134,13 @@
 
                         <!-- Action Buttons -->
                         <div class="flex flex-col justify-evenly gap-4">
-                            <button class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition whitespace-nowrap">
+                            <button
+                                class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition whitespace-nowrap">
                                 <i class="fa-solid fa-calculator text-green-800 mr-2"></i>
                                 Calculate
                             </button>
-                            <button class="invest-button gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
+                            <button
+                                class="invest-button gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
                                 <i class="fa-solid fa-money-bill-1-wave text-white mr-2"></i>
                                 Invest
                             </button>
@@ -137,14 +152,17 @@
     </div>
 
     <!--========================================
-      Calculation Modal
-    ========================================-->
-    <div id="calcModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm" aria-hidden="true">
+                  Calculation Modal
+                ========================================-->
+    <div id="calcModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm"
+        aria-hidden="true">
         <div id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle"
-             class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
+            class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-7xl transform scale-0">
 
             <!-- Close Button -->
-            <button id="closeCalcModal" aria-label="Close modal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">
+            <button id="closeCalcModal" aria-label="Close modal" class="absolute top-0 z-10 text-gray-600 text-2xl"
+                style="right: 1rem">
                 &times;
             </button>
 
@@ -155,9 +173,8 @@
                     <!-- Number of Trees Input -->
                     <div class="mb-4">
                         <label for="treeCount" class="block font-bold">Number of Trees</label>
-                        <input type="number" id="treeCount" name="treeCount"
-                               class="w-full p-2 border rounded" placeholder="Enter number of trees"
-                               required aria-invalid="false" min="0">
+                        <input type="number" id="treeCount" name="treeCount" class="w-full p-2 border rounded"
+                            placeholder="Enter number of trees" required aria-invalid="false" min="0">
                         <div id="treeCountError" class="text-red-600 text-sm hidden">
                             Please enter a valid number.
                         </div>
@@ -166,9 +183,8 @@
                     <!-- Investment Years Input -->
                     <div class="mb-4">
                         <label for="investmentYears" class="block font-bold">Years</label>
-                        <input type="number" id="investmentYears" name="years"
-                               class="w-full p-2 border rounded" placeholder="Enter years"
-                               required aria-invalid="false" min="0">
+                        <input type="number" id="investmentYears" name="years" class="w-full p-2 border rounded"
+                            placeholder="Enter years" required aria-invalid="false" min="0">
                         <div id="investmentYearsError" class="text-red-600 text-sm hidden">
                             Please enter a valid number of years.
                         </div>
@@ -188,14 +204,16 @@
                     </div>
 
                     <!-- Calculation Button with Spinner -->
-                    <button type="submit" class="w-full py-2 bg-white hover:bg-gray-200 text-green-800 font-bold border-2 border-green-800 rounded mt-2">
+                    <button type="submit"
+                        class="w-full py-2 bg-white hover:bg-gray-200 text-green-800 font-bold border-2 border-green-800 rounded mt-2">
                         <i class="fa-solid fa-calculator text-green-800 mr-2"></i>
                         Calculate
                     </button>
                 </form>
 
                 <!-- Button to Open Investment Modal -->
-                <button id="goToInvestBtn" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-4">
+                <button id="goToInvestBtn"
+                    class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-4">
                     <i class="fa-solid fa-money-bill-1-wave text-white mr-2"></i>
                     Go To Invest
                 </button>
@@ -220,14 +238,17 @@
     </div>
 
     <!--========================================
-      Investment Modal
-    ========================================-->
-    <div id="investModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm" aria-hidden="true">
+                  Investment Modal
+                ========================================-->
+    <div id="investModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm"
+        aria-hidden="true">
         <div id="investContent" role="dialog" aria-modal="true" aria-labelledby="investModalTitle"
-             class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-2xl transform scale-0">
+            class="bg-white relative rounded-lg shadow-lg flex w-3/4 max-w-2xl transform scale-0">
 
             <!-- Close Button -->
-            <button id="closeInvestModal" aria-label="Close invest modal" class="absolute top-0 z-10 text-gray-600 text-2xl" style="right: 1rem">
+            <button id="closeInvestModal" aria-label="Close invest modal" class="absolute top-0 z-10 text-gray-600 text-2xl"
+                style="right: 1rem">
                 &times;
             </button>
 
@@ -237,8 +258,8 @@
                     <!-- Number of Trees for Investment -->
                     <div class="mb-4">
                         <label for="investTreeCount" class="block font-bold">Number of Trees to Invest</label>
-                        <input type="number" id="investTreeCount" name="investTreeCount"
-                               class="w-full p-2 border rounded" placeholder="Enter number of trees" required min="0">
+                        <input type="number" id="investTreeCount" name="investTreeCount" class="w-full p-2 border rounded"
+                            placeholder="Enter number of trees" required min="0">
                         <div id="investTreeCountError" class="text-red-600 text-sm hidden">
                             Please enter a valid number.
                         </div>
@@ -252,7 +273,8 @@
                     </div>
 
                     <!-- Investment Submission Button -->
-                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-6">
+                    <button type="submit"
+                        class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-6">
                         Submit Investment
                     </button>
                 </form>
@@ -268,40 +290,40 @@
             /*----------------------------------------
               DOM Elements
             ----------------------------------------*/
-            const calcModal         = document.getElementById('calcModal');
-            const modalContent      = document.getElementById('modalContent');
-            const closeCalcModal    = document.getElementById('closeCalcModal');
-            const calcButtons       = document.querySelectorAll('.calc-button');
-            const modalProjectId    = document.getElementById('modalProjectId');
-            const calcForm          = document.getElementById('calcForm');
-            const retailCostValue   = document.getElementById('retailCostValue');
+            const calcModal = document.getElementById('calcModal');
+            const modalContent = document.getElementById('modalContent');
+            const closeCalcModal = document.getElementById('closeCalcModal');
+            const calcButtons = document.querySelectorAll('.calc-button');
+            const modalProjectId = document.getElementById('modalProjectId');
+            const calcForm = document.getElementById('calcForm');
+            const retailCostValue = document.getElementById('retailCostValue');
             const incomeChartCanvas = document.getElementById('incomeChart');
             const paybackPeriodElem = document.getElementById('paybackPeriod');
-            const profitPeriodElem  = document.getElementById('profitPeriod');
-            const netProfitElem     = document.getElementById('netProfit');
-            const goToInvestBtn     = document.getElementById('goToInvestBtn');
-            const calcSpinner       = document.getElementById('calcSpinner');
+            const profitPeriodElem = document.getElementById('profitPeriod');
+            const netProfitElem = document.getElementById('netProfit');
+            const goToInvestBtn = document.getElementById('goToInvestBtn');
+            const calcSpinner = document.getElementById('calcSpinner');
 
-            const investModal       = document.getElementById('investModal');
-            const investContent     = document.getElementById('investContent');
-            const closeInvestModal  = document.getElementById('closeInvestModal');
-            const investForm        = document.getElementById('investForm');
-            const investTreeCount   = document.getElementById('investTreeCount');
+            const investModal = document.getElementById('investModal');
+            const investContent = document.getElementById('investContent');
+            const closeInvestModal = document.getElementById('closeInvestModal');
+            const investForm = document.getElementById('investForm');
+            const investTreeCount = document.getElementById('investTreeCount');
             const calculatedInvestment = document.getElementById('calculatedInvestment');
 
             /*----------------------------------------
               Error Message Elements
             ----------------------------------------*/
-            const treeCountError    = document.getElementById('treeCountError');
+            const treeCountError = document.getElementById('treeCountError');
             const investmentYearsError = document.getElementById('investmentYearsError');
             const investTreeCountError = document.getElementById('investTreeCountError');
 
             /*----------------------------------------
               Variables
             ----------------------------------------*/
-            let averageRetailCost   = null;
+            let averageRetailCost = null;
             let selectedProjectPrice = null;
-            const yieldPerTree      = 20;
+            const yieldPerTree = 20;
 
             /*----------------------------------------
               Toast Notification Setup
@@ -488,7 +510,7 @@
             ----------------------------------------*/
             // Open calculation modal from project listing
             calcButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const li = this.closest('li');
                     modalProjectId.value = li ? li.dataset.projectId : '';
                     selectedProjectPrice = li ? parseFloat(li.dataset.price) : null;
@@ -511,7 +533,7 @@
 
             // Open investment modal directly
             document.querySelectorAll('.invest-button').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const li = this.closest('li');
                     modalProjectId.value = li ? li.dataset.projectId : '';
                     selectedProjectPrice = li ? parseFloat(li.dataset.price) : null;
@@ -537,12 +559,12 @@
             /*----------------------------------------
               Calculation Form Submission Handler
             ----------------------------------------*/
-            calcForm.addEventListener('submit', function(e) {
+            calcForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
                 // Inline validation
                 let valid = true;
-                const treeCount     = parseFloat(document.getElementById('treeCount').value);
+                const treeCount = parseFloat(document.getElementById('treeCount').value);
                 const investmentYears = parseInt(document.getElementById('investmentYears').value);
 
                 if (isNaN(treeCount) || treeCount <= 0) {
@@ -574,10 +596,10 @@
                 }
 
                 // Calculation Logic
-                const totalCost    = treeCount * selectedProjectPrice;
+                const totalCost = treeCount * selectedProjectPrice;
                 const annualIncome = treeCount * yieldPerTree * averageRetailCost;
                 const cumulativeNetProfit = [];
-                const labels       = [];
+                const labels = [];
 
                 for (let year = 1; year <= investmentYears; year++) {
                     let cumIncome = annualIncome * year;
@@ -618,8 +640,12 @@
 
                 // Update UI with results
                 paybackPeriodElem.textContent = payback;
-                profitPeriodElem.textContent  = investmentYears;
-                netProfitElem.textContent     = finalNetProfit.toFixed(2);
+                profitPeriodElem.textContent = investmentYears;
+                // Format final net profit
+                netProfitElem.textContent = new Intl.NumberFormat('de-DE', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(finalNetProfit);
 
                 // Hide spinner after calculation
                 calcSpinner.classList.add('hidden');
@@ -628,7 +654,7 @@
             /*----------------------------------------
               Investment Form Submission Handler
             ----------------------------------------*/
-            investForm.addEventListener('submit', function(e) {
+            investForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 let valid = true;
                 const numInvestTrees = parseFloat(investTreeCount.value);
@@ -643,7 +669,7 @@
                     return;
                 }
                 const projectId = modalProjectId.value;
-                const payload   = {
+                const payload = {
                     project_id: projectId,
                     number_of_trees: numInvestTrees
                 };
