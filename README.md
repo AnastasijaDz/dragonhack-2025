@@ -41,7 +41,7 @@ The application is containerized using Docker with the following services:
 - **Laravel App Container (app):** PHP-FPM running the Laravel application, handling API endpoints and business logic.
 - **Web Server (nginx):** Serves the application on port 80, routing HTTP requests to PHP-FPM.
 - **Database (mysql):** MySQL 8.0 for data storage with persistent volumes.
-- **Database Management (phpmyadmin):** Web interface for managing MySQL, accessible at [http://localhost:8080](http://localhost:8080).
+- **Database Management (phpmyadmin):** Web interface for managing MySQL.
 - **Node.js Environment (node):** Node.js 20 for asset compilation and JavaScript dependency management.
 
 ## Development Setup
