@@ -121,13 +121,12 @@
 
                         <!-- Action Buttons -->
                         <div class="flex flex-col justify-evenly gap-4">
-                            <button class="calc-button py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
-                                <i class="fa-solid fa-calculator text-white mr-1"></i>
+                            <button class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition">
                                 Calculate
                             </button>
                             <button class="invest-button gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
-                                <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
                                 Invest
+                                <i class="fa-solid fa-money-bill-1-wave text-white ml-1"></i>
                             </button>
                         </div>
                     </li>
@@ -157,7 +156,7 @@
                         <label for="treeCount" class="block font-bold">Number of Trees</label>
                         <input type="number" id="treeCount" name="treeCount"
                                class="w-full p-2 border rounded" placeholder="Enter number of trees"
-                               required aria-invalid="false">
+                               required aria-invalid="false" min="0">
                         <div id="treeCountError" class="text-red-600 text-sm hidden">
                             Please enter a valid number.
                         </div>
@@ -168,7 +167,7 @@
                         <label for="investmentYears" class="block font-bold">Years</label>
                         <input type="number" id="investmentYears" name="years"
                                class="w-full p-2 border rounded" placeholder="Enter years"
-                               required aria-invalid="false">
+                               required aria-invalid="false" min="0">
                         <div id="investmentYearsError" class="text-red-600 text-sm hidden">
                             Please enter a valid number of years.
                         </div>
@@ -188,16 +187,15 @@
                     </div>
 
                     <!-- Calculation Button with Spinner -->
-                    <button type="submit" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-2">
-                        <i class="fa-solid fa-calculator text-white ml-1"></i>
+                    <button type="submit" class="w-full py-2 bg-white hover:bg-gray-200 text-green-800 font-bold border-2 border-green-800 rounded mt-2">
                         Calculate
                     </button>
                 </form>
 
                 <!-- Button to Open Investment Modal -->
-                <button id="goToInvestBtn" class="w-full py-2 bg-blue-800 hover:bg-blue-700 text-white font-bold rounded mt-4">
+                <button id="goToInvestBtn" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-4">
                     <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
-                    Go to Invest
+                    Go To Invest
                 </button>
             </div>
 
@@ -238,7 +236,7 @@
                     <div class="mb-4">
                         <label for="investTreeCount" class="block font-bold">Number of Trees to Invest</label>
                         <input type="number" id="investTreeCount" name="investTreeCount"
-                               class="w-full p-2 border rounded" placeholder="Enter number of trees" required>
+                               class="w-full p-2 border rounded" placeholder="Enter number of trees" required min="0">
                         <div id="investTreeCountError" class="text-red-600 text-sm hidden">
                             Please enter a valid number.
                         </div>
@@ -327,7 +325,7 @@
                     datasets: [{
                         label: 'Cumulative Net Profit',
                         data: [],
-                        borderColor: 'blue',
+                        borderColor: 'green',
                         fill: false
                     }]
                 },
@@ -407,7 +405,7 @@
                             datasets: [{
                                 label: 'Cumulative Net Profit',
                                 data: [],
-                                borderColor: 'blue',
+                                borderColor: 'green',
                                 fill: false
                             }]
                         },
@@ -583,7 +581,7 @@
                         datasets: [{
                             label: 'Cumulative Net Profit',
                             data: cumulativeNetProfit,
-                            borderColor: 'blue',
+                            borderColor: 'green',
                             fill: false
                         }]
                     },
