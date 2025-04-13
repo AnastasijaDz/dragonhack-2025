@@ -3,8 +3,8 @@
 @section('content')
     <style>
         /*========================================
-              Modal Animations
-            ========================================*/
+                      Modal Animations
+                    ========================================*/
         @keyframes whoopIn {
             0% {
                 transform: scale(0);
@@ -48,8 +48,8 @@
         }
 
         /*========================================
-              Spinner CSS
-            ========================================*/
+                      Spinner CSS
+                    ========================================*/
         .spinner {
             display: inline-block;
             width: 16px;
@@ -69,16 +69,16 @@
         }
 
         /*========================================
-              Modal Overlay Fade
-            ========================================*/
+                      Modal Overlay Fade
+                    ========================================*/
         #calcModal,
         #investModal {
             transition: opacity 0.3s ease-in-out;
         }
 
         /*========================================
-              Toast Styles
-            ========================================*/
+                      Toast Styles
+                    ========================================*/
         #toastContainer {
             position: fixed;
             bottom: 20px;
@@ -152,8 +152,8 @@
     </div>
 
     <!--========================================
-          Calculation Modal
-        ========================================-->
+                  Calculation Modal
+                ========================================-->
     <div id="calcModal"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm"
         aria-hidden="true">
@@ -238,8 +238,8 @@
     </div>
 
     <!--========================================
-          Investment Modal
-        ========================================-->
+                  Investment Modal
+                ========================================-->
     <div id="investModal"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden backdrop-blur-sm"
         aria-hidden="true">
@@ -629,7 +629,11 @@
                 // Update UI with results
                 paybackPeriodElem.textContent = payback;
                 profitPeriodElem.textContent = investmentYears;
-                netProfitElem.textContent = finalNetProfit.toFixed(2);
+                // Format final net profit 
+                netProfitElem.textContent = new Intl.NumberFormat('de-DE', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(finalNetProfit);
 
                 // Hide spinner after calculation
                 calcSpinner.classList.add('hidden');
