@@ -31,19 +31,19 @@ class InvestmentsController extends Controller
             ->get();
         return view('investments.index', compact('investments'));
     }
-    
+
     public function getTokens(Request $request, $investmentId): JsonResponse
     {
         try {
             $user = Auth::user();
             $investorId = $user->investor ? $user->investor->id : null;
-            
+
             $investment = Investment::where('id', $investmentId)
                 ->where('investor_id', $investorId)
                 ->firstOrFail();
-            
+
             $tokens = $investment->tokens;
-            
+
             return response()->json([
                 'success' => true,
                 'tokens' => $tokens
@@ -55,47 +55,58 @@ class InvestmentsController extends Controller
             ], 500);
         }
     }
-    
+
     public function transferTokens(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'token_ids' => 'required|array',
-                'token_ids.*' => 'required|integer|exists:tokens,id',
-                'recipient_email' => 'required|email',
-                'project_id' => 'required|integer|exists:projects,id'
+                'tokens_to_sell'   => 'required|integer|min:1',
+                'recipient_email'  => 'required|email',
+                'project_id'       => 'required|integer|exists:projects,id'
             ]);
-            
+
             if ($validator->fails()) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Validation failed',
-                    'errors' => $validator->errors()
+                    'errors'  => $validator->errors()
                 ], 422);
             }
-            
+
             $user = Auth::user();
-            $investorId = $user->investor ? $user->investor->id : null;
-            
-            $tokenCount = Token::whereIn('id', $request->token_ids)
-                ->whereHas('investment', function ($query) use ($investorId) {
-                    $query->where('investor_id', $investorId);
-                })
-                ->count();
-            
-            if ($tokenCount !== count($request->token_ids)) {
+            if (!$user || !$user->investor) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'You do not own all of these tokens'
+                    'message' => 'User is not a valid investor'
                 ], 403);
             }
-            
+
+            $ownedTokenCount = Token::whereHas('investment', function ($query) use ($user, $request) {
+                $query->where('investor_id', $user->investor->id)
+                    ->where('project_id', $request->project_id);
+            })->count();
+
+            if ($ownedTokenCount < $request->tokens_to_sell) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You do not have enough tokens to sell'
+                ], 403);
+            }
+
+            $tokenIds = Token::whereHas('investment', function ($query) use ($user, $request) {
+                $query->where('investor_id', $user->investor->id)
+                    ->where('project_id', $request->project_id);
+            })
+                ->limit($request->tokens_to_sell)
+                ->pluck('id')
+                ->toArray();
+
             $this->tokenService->transferTokensToInvestorByEmail(
-                $request->token_ids,
+                $tokenIds,
                 $request->recipient_email,
                 $request->project_id
             );
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'Tokens transferred successfully'
