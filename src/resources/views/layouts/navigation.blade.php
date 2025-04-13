@@ -58,7 +58,7 @@
                     @csrf
                     <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                         <div class="w-8 h-8">
-                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                            <img class="w-full h-full" src="/svgs/dollar-square.svg" alt="Logout">
                         </div>
                         <p>My Portfolio</p>
                     </button>
@@ -69,7 +69,7 @@
                     @csrf
                     <button type="submit" class="w-full px-4 flex flex-row items-center hover:bg-gray-200 py-6 gap-4">
                         <div class="w-8 h-8">
-                            <img class="w-full h-full" src="/svgs/logout.svg" alt="Logout">
+                            <img class="w-full h-full" src="/svgs/moneys.svg" alt="Logout">
                         </div>
                         <p>Manage investments</p>
                     </button>
