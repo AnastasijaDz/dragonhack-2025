@@ -46,7 +46,7 @@
         @else
             <ul class="flex flex-col gap-10 items-center">
                 @foreach($projects as $project)
-                    <li data-project-id="{{ $project->id }}" data-price="{{ $project->price }}" class="project-item flex flex-row gap-10 shadow-lg rounded-xl bg-white p-8 w-[80%]">
+                    <li data-project-id="{{ $project->id }}" data-price="{{ $project->price }}" class="project-item flex flex-row gap-10 shadow-lg border-2 rounded-xl bg-white p-8 w-[80%]">
                         <div class="flex-shrink-0 flex items-center">
                             <div class="w-[200px] h-auto">
                                 <img class="rounded-lg" src="/images/barn.png" alt="Project Image">
