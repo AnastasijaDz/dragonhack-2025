@@ -144,10 +144,9 @@ class InvestmentsController extends Controller
             'number_of_trees' => 'required|integer|min:1',
         ]);
 
-        $investment = Investment::create([
-            'investor_id' => $user->investor->id,
-            'project_id'  => $data['project_id'],
-        ]);
+        $investment = Investment::firstOrCreate(
+            ['project_id' => $data['project_id'], 'investor_id' => $user->investor->id]
+        );
 
         $this->tokenService->generateTokensForInvestment($investment, $data['number_of_trees']);
 

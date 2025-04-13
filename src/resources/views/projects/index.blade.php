@@ -121,7 +121,7 @@
 
                         <!-- Action Buttons -->
                         <div class="flex flex-col justify-evenly gap-4">
-                            <button class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition">
+                            <button class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition whitespace-nowrap">
                                 <i class="fa-solid fa-calculator text-green-800 mr-2"></i>
                                 Calculate
                             </button>
@@ -372,13 +372,25 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.average_retail_cost) {
-                            averageRetailCost = parseFloat(data.average_retail_cost);
-                            retailCostValue.textContent = averageRetailCost.toFixed(2);
+                        const cleanValue = data.average_retail_cost.toString().replace(/[^0-9.]/g, '');
+
+                        const averageRetailCost = parseFloat(cleanValue);
+
+                        const formatter = new Intl.NumberFormat('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                        const formattedValue = formatter.format(averageRetailCost);
+
+                        const retailCostValue = document.getElementById('retailCostValue');
+                        if (retailCostValue) {
+                            retailCostValue.textContent = formattedValue;
+                        } else {
+                            console.error("Element with id 'retailCostValue' not found.");
                         }
                     })
                     .catch(error => {
-                        console.error(error);
+                        console.error('Error fetching average retail cost:', error);
                         showToast('Failed to fetch average retail cost. Please try again.');
                     });
             };
