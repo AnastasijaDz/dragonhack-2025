@@ -14,25 +14,25 @@
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-8">Meet Our Team</h2>
             <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2">
                     <img src="/images/Anja.png" alt="Anja Kuzevska"
                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
                     <h3 class="text-xl font-semibold">Anja Kuzevska</h3>
                     <p class="text-gray-600">CEO</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2">
                     <img src="/images/Anastasija.png" alt="Anastasija Djajkovska"
                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" style="object-position: center -10px;">
                     <h3 class="text-xl font-semibold">Anastasija Djajkovska</h3>
                     <p class="text-gray-600">CTO</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2">
                     <img src="/images/Jordan.png" alt="Jordan Lazov"
                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" style="object-position: center -10px;">
                     <h3 class="text-xl font-semibold">Jordan Lazov</h3>
                     <p class="text-gray-600">Senior Software Engineer</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2">
                     <img src="/images/Aleksa.jpeg" alt="Aleksa Sibinović"
                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
                     <h3 class="text-xl font-semibold">Aleksa Sibinović</h3>
