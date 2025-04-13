@@ -38,12 +38,14 @@ Route::get('/investments/{investment}/tokens', [InvestmentsController::class, 'g
 Route::post('/tokens/transfer', [InvestmentsController::class, 'transferTokens'])
     ->middleware(['auth', 'verified'])
     ->name('transfer-tokens');
-    
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::view('/about', 'aboutus.index')->name('about');
 
 Route::post('/calculate', [CalculatorController::class, 'calculate']);
 
