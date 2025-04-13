@@ -156,7 +156,7 @@
                         <label for="treeCount" class="block font-bold">Number of Trees</label>
                         <input type="number" id="treeCount" name="treeCount"
                                class="w-full p-2 border rounded" placeholder="Enter number of trees"
-                               required aria-invalid="false">
+                               required aria-invalid="false" min="0">
                         <div id="treeCountError" class="text-red-600 text-sm hidden">
                             Please enter a valid number.
                         </div>
@@ -167,7 +167,7 @@
                         <label for="investmentYears" class="block font-bold">Years</label>
                         <input type="number" id="investmentYears" name="years"
                                class="w-full p-2 border rounded" placeholder="Enter years"
-                               required aria-invalid="false">
+                               required aria-invalid="false" min="0">
                         <div id="investmentYearsError" class="text-red-600 text-sm hidden">
                             Please enter a valid number of years.
                         </div>
@@ -325,7 +325,7 @@
                     datasets: [{
                         label: 'Cumulative Net Profit',
                         data: [],
-                        borderColor: 'blue',
+                        borderColor: 'green',
                         fill: false
                     }]
                 },
@@ -405,7 +405,7 @@
                             datasets: [{
                                 label: 'Cumulative Net Profit',
                                 data: [],
-                                borderColor: 'blue',
+                                borderColor: 'green',
                                 fill: false
                             }]
                         },
@@ -581,7 +581,7 @@
                         datasets: [{
                             label: 'Cumulative Net Profit',
                             data: cumulativeNetProfit,
-                            borderColor: 'blue',
+                            borderColor: 'green',
                             fill: false
                         }]
                     },
