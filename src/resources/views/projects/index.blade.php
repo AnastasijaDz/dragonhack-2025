@@ -394,21 +394,9 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        const cleanValue = data.average_retail_cost.toString().replace(/[^0-9.]/g, '');
-
-                        const averageRetailCost = parseFloat(cleanValue);
-
-                        const formatter = new Intl.NumberFormat('en-US', {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2
-                        });
-                        const formattedValue = formatter.format(averageRetailCost);
-
-                        const retailCostValue = document.getElementById('retailCostValue');
-                        if (retailCostValue) {
-                            retailCostValue.textContent = formattedValue;
-                        } else {
-                            console.error("Element with id 'retailCostValue' not found.");
+                        if (data.average_retail_cost) {
+                            averageRetailCost = parseFloat(data.average_retail_cost);
+                            retailCostValue.textContent = averageRetailCost.toFixed(2);
                         }
                     })
                     .catch(error => {
