@@ -122,11 +122,12 @@
                         <!-- Action Buttons -->
                         <div class="flex flex-col justify-evenly gap-4">
                             <button class="calc-button py-3 px-4 rounded-md bg-white hover:bg-gray-200 text-green-800 border-2 border-green-800 font-bold transition">
+                                <i class="fa-solid fa-calculator text-green-800 mr-2"></i>
                                 Calculate
                             </button>
                             <button class="invest-button gap-2 py-3 px-4 rounded-md bg-green-800 hover:bg-green-700 text-white font-bold transition">
+                                <i class="fa-solid fa-money-bill-1-wave text-white mr-2"></i>
                                 Invest
-                                <i class="fa-solid fa-money-bill-1-wave text-white ml-1"></i>
                             </button>
                         </div>
                     </li>
@@ -188,13 +189,14 @@
 
                     <!-- Calculation Button with Spinner -->
                     <button type="submit" class="w-full py-2 bg-white hover:bg-gray-200 text-green-800 font-bold border-2 border-green-800 rounded mt-2">
+                        <i class="fa-solid fa-calculator text-green-800 mr-2"></i>
                         Calculate
                     </button>
                 </form>
 
                 <!-- Button to Open Investment Modal -->
                 <button id="goToInvestBtn" class="w-full py-2 bg-green-800 hover:bg-green-700 text-white font-bold rounded mt-4">
-                    <i class="fa-solid fa-money-bill-1-wave text-white mr-1"></i>
+                    <i class="fa-solid fa-money-bill-1-wave text-white mr-2"></i>
                     Go To Invest
                 </button>
             </div>
