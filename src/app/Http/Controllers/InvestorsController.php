@@ -20,6 +20,11 @@ class InvestorsController extends Controller
     {
         $user = Auth::user();
         $investor = Investor::with('user')->findOrFail($user->profile()->id);
+        // dd($investor->total_invested); // Invested
+        // dd($investor->earned_price); // Earned back
+        // dd($investor->most_profitable_project?->name); // Most profitable project
+        // dd($investor->investments_per_year); // Most profitable project
+        // dd($investor->investment_allocation); // Investment allocation
         return view('investors.show', compact('investor'));
     }
 
