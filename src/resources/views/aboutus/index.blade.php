@@ -65,7 +65,7 @@
                     <i class="fab fa-facebook fa-2x"></i>
                 </a>
                 <a href="#" class="text-green-700 hover:text-green-600">
-                    <i class="fab fa-twitter fa-2x"></i>
+                    <i class="fab fa-x-twitter fa-2x"></i>
                 </a>
                 <a href="#" class="text-green-700 hover:text-green-600">
                     <i class="fab fa-linkedin fa-2x"></i>
