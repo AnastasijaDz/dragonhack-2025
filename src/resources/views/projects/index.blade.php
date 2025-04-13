@@ -98,7 +98,7 @@
             <ul class="flex flex-col gap-10 items-center">
                 @foreach($projects as $project)
                     <li data-project-id="{{ $project->id }}" data-price="{{ $project->price }}"
-                        class="project-item flex flex-col sm:flex-row gap-6 shadow-lg rounded-xl bg-gradient-to-br from-white via-gray-50 to-white p-6 w-full max-w-5xl">
+                        class="project-item flex flex-col sm:flex-row gap-6 shadow-lg rounded-xl bg-gradient-to-br from-white via-gray-50 to-white p-6 w-full max-w-5xl border-2">
 
                         <!-- Project Image -->
                         <div class="flex-shrink-0">
